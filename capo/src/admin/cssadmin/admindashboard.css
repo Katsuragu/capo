@@ -1,0 +1,48 @@
+/* General Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  height: 100%;
+  overflow: hidden; /* Prevent double scrollbars */
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto; /* Add vertical scrollbar */
+}
+
+.navbar {
+  background-color: #145A4C;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links button {
+  background-color: #f4f4f4;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.header {
+  background-color: #145A4C;
+  color: white;
+  padding: 50px;
+  text-align: center;
+}
+
+.filters button {
+  background-color: #f4f4f4;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}

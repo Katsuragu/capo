@@ -1,0 +1,44 @@
+.browse-homes-container {
+    color: black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.browse-homes-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.browse-homes-row {
+    display: flex;
+    gap: 20px;
+}
+
+.browse-homes-item {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.browse-homes-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.browse-homes-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}

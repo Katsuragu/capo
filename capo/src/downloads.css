@@ -1,0 +1,145 @@
+/* General Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  height: 100%;
+  overflow: hidden; /* Prevent double scrollbars */
+}
+
+.downloads-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden; /* Prevent double scrollbars */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0a726f;
+  padding: 10px 20px;
+  color: white;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.nav-link:hover {
+  background-color: #065e5c;
+  border-radius: 5px;
+}
+
+.nav-link.active {
+  background-color: #065e5c;
+  border-radius: 5px;
+}
+
+.user-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px); /* Adjust height to fit within viewport */
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the left */
+  text-align: left; /* Align text to the left */
+  color: white;
+  padding-left: 2rem; /* Add padding to the left */
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 42rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+}
+
+.app-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.app-button {
+  padding: 1rem 2rem; /* Increase padding for larger buttons */
+  font-size: 1.25rem; /* Increase font size */
+  border: none;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.google-play {
+  background-color: #2563eb;
+  color: white;
+}
+
+.app-store {
+  background-color: black;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 1.5rem;
+  background-color: transparent;
+  color: white;
+  padding: 1rem 2rem; /* Add padding to the left */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem; 
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
