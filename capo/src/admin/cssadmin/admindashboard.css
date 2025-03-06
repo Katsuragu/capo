@@ -24,25 +24,50 @@ body, html {
   align-items: center;
 }
 
+.navbar h2 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
 .nav-links button {
   background-color: #f4f4f4;
   border: none;
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-.header {
-  background-color: #145A4C;
-  color: white;
-  padding: 50px;
-  text-align: center;
+.nav-links button:hover {
+  background-color: #e0e0e0;
 }
 
-.filters button {
-  background-color: #f4f4f4;
-  border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
+.analytics-content {
+  padding: 20px;
+}
+
+.analytics-section {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analytics-section h2 {
+  margin-top: 0;
+}
+
+.chart {
+  height: 300px;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
