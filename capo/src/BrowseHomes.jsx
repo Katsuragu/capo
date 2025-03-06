@@ -9,12 +9,21 @@ const BrowseHomes = () => {
     { name: "Villa", img: "/src/images/villa.jpg" },
   ];
 
+  const handleImageClick = (categoryName) => {
+    console.log(`Clicked on ${categoryName}`);
+    // Implement your navigation or action here
+  };
+
   return (
     <div className="browse-homes-container">
       <h2 className="browse-homes-title">Browse Homes</h2>
       <div className="browse-homes-row">
         {homeCategories.map((category, index) => (
-          <div key={index} className="browse-homes-item">
+          <div
+            key={index}
+            className="browse-homes-item"
+            onClick={() => handleImageClick(category.name)}
+          >
             <img src={category.img} alt={category.name} className="browse-homes-image" />
             <div className="browse-homes-label">
               {category.name}
