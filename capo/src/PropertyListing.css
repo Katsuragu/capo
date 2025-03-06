@@ -68,6 +68,12 @@ body, html {
   filter: brightness(0.7);
 }
 
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .background-banner h2 {
   position: absolute;
   top: 2.5rem; /* top-10 equivalent */
@@ -143,7 +149,7 @@ body, html {
 
 /* Footer */
 .property-footer {
-  background-color: #145A4C;
+  background-color: transparent;
   color: white;
   text-align: left;
   padding: 10px;

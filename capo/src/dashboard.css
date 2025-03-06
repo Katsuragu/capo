@@ -59,7 +59,7 @@ body, html {
   
   .dashboard-section {
 height: 100%;
-    background-color:  rgba(20, 90, 76, 0.5); /* Set the background color with 5% transparency */
+    background-color:  rgba(20, 90, 76, 0.5); 
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }

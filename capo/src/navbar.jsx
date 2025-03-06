@@ -12,7 +12,7 @@ const Navbar = () => {
         <nav className='navbar'>
             <div className='navbar-brand'>Walk-IN</div>
             <ul className='navbar-nav'>
-                <li className='nav-item'><a href='/dashboard'>Dashboard</a></li>
+                <li className='nav-item'><a href='/dashboard'>Home</a></li>
                 <li className='nav-item'><a href='/property-listing'>Property</a></li>
                 <li className='nav-item'><a href='/downloads' className='active'>Downloads</a></li>
             </ul>

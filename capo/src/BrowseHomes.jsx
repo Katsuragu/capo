@@ -3,10 +3,10 @@ import './BrowseHomes.css'; // Import the CSS file
 
 const BrowseHomes = () => {
   const homeCategories = [
-    { name: "Houses", img: "/src/images/house1.jpg" },
-    { name: "Hotels", img: "/src/images/hotels.jpg" },
-    { name: "Apartments", img: "/src/images/images.jpg" },
-    { name: "Villa", img: "/src/images/villa.jpg" },
+    { name: "Duraville", img: "/src/images/house1.jpg" },
+    { name: "Lancrest", img: "/src/images/hotels.jpg" },
+    { name: "Treelane", img: "/src/images/images.jpg" },
+    { name: "Camella", img: "/src/images/villa.jpg" },
   ];
 
   const handleImageClick = (categoryName) => {
@@ -16,7 +16,7 @@ const BrowseHomes = () => {
 
   return (
     <div className="browse-homes-container">
-      <h2 className="browse-homes-title">Browse Homes</h2>
+      <h2 className="browse-homes-title">Villages</h2>
       <div className="browse-homes-row">
         {homeCategories.map((category, index) => (
           <div
