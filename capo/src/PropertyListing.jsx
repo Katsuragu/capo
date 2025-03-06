@@ -4,6 +4,42 @@ import { FaSearch } from 'react-icons/fa'; // Import the search icon
 import "./PropertyListing.css"; // Import the CSS file
 
 const PropertyListing = () => {
+  const properties = [
+    {
+      id: 1,
+      type: "Home",
+      price: "$100000",
+      description: "Beautiful home with a spacious garden.",
+      location: "Imus",
+      img: "/src/images/house1.jpg"
+    },
+    {
+      id: 2,
+      type: "Hotel",
+      price: "$200000",
+      description: "Luxurious hotel with modern amenities.",
+      location: "Manila",
+      img: "/src/images/hotels.jpg"
+    },
+    {
+      id: 3,
+      type: "Apartment",
+      price: "$150000",
+      description: "Cozy apartment in the city center.",
+      location: "Quezon City",
+      img: "/src/images/images.jpg"
+    },
+    {
+      id: 4,
+      type: "Villa",
+      price: "$300000",
+      description: "Elegant villa with a private pool.",
+      location: "Tagaytay",
+      img: "/src/images/villa.jpg"
+    },
+    // Add more properties as needed
+  ];
+
   return (
     <div className="property-container">
       <Navbar /> {/* Add the Navbar component */}
@@ -21,22 +57,16 @@ const PropertyListing = () => {
         </div>
       </header>
       <main className="property-main">
-        <div
-          className="background-banner"
-          
-        >
-          
-        </div>
-
+        <div className="background-banner"></div>
         <div className="property-listings">
-          {[1, 2, 3, 4, 5, 6].map((_, index) => (
-            <div key={index} className="property-card">
-              <div className="image-placeholder"></div>
-              <p className="property-type">(property type eg. Home, Hotel)</p>
-              <h3 className="price">$100000</h3>
-              <p className="description">Description...</p>
+          {properties.map((property) => (
+            <div key={property.id} className="property-card">
+              <img src={property.img} alt={property.type} className="property-image" />
+              <p className="property-type">{property.type}</p>
+              <h3 className="price">{property.price}</h3>
+              <p className="description">{property.description}</p>
               <p className="location">
-                <span>📍</span>Imus
+                <span>📍</span>{property.location}
               </p>
               <button className="contact-button">Contact agent</button>
             </div>
