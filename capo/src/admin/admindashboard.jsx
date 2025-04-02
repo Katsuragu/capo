@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import Navbar from '../navbar'; // Import the Navbar component
 import './cssadmin/admindashboard.css'; // Import the CSS file
 
 // Register Chart.js components
@@ -61,11 +62,20 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="admin-dashboard">
-            <h1>Admin Dashboard</h1>
-            <div className="chart-container">
-                <Bar data={chartData} options={chartOptions} />
-            </div>
+        <div className="admin-dashboard-container">
+            <Navbar /> {/* Add the Navbar component */}
+            <header className="admin-dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <p>Welcome to the admin panel. View analytics and manage properties.</p>
+            </header>
+            <main className="admin-dashboard-main">
+                <section className="admin-dashboard-section">
+                    <div className="chart-container">
+                        <Bar data={chartData} options={chartOptions} />
+                    </div>
+                </section>
+               
+            </main>
         </div>
     );
 };
