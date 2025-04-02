@@ -1,0 +1,21 @@
+.admin-dashboard {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #145A4C;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
