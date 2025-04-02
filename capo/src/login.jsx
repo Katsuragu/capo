@@ -5,7 +5,6 @@ import './login.css'; // Import the CSS file
 
 const Login = () => {
     const navigate = useNavigate();
-    
     const [authing, setAuthing] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,16 +15,51 @@ const Login = () => {
         setAuthing(true);
         setError('');
 
-        // Simulate sign in with email and password
+        // Input validation
+        if (!email || !password) {
+            setError('All fields are required');
+            setAuthing(false);
+            return;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            setError('Invalid email format');
+            setAuthing(false);
+            return;
+        }
+
         try {
-            console.log('User signed in with email:', email);
-            navigate('/dashboard'); 
+            const response = await fetch('http://localhost/walkin/login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.message) {
+                console.log('User signed in with email:', email);
+
+                // Navigate based on access level
+                if (data.access === 1) {
+                    navigate('/dashboard'); // Navigate to user dashboard
+                } else if (data.access === 2) {
+                    navigate('/admin-dashboard'); // Navigate to admin dashboard
+                } else {
+                    setError('Invalid access level');
+                }
+            } else {
+                setError(data.error || 'Failed to sign in');
+                setAuthing(false);
+            }
         } catch (error) {
             console.log(error);
-            setError('Failed to sign in');
+            setError('Failed to connect to the server');
             setAuthing(false);
         }
-    }
+    };
 
     return (
         <div className='login-container'>

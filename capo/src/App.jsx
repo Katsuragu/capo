@@ -5,7 +5,7 @@ import Signup from './signup';
 import Dashboard from './dashboard';
 import PropertyListing from './PropertyListing';
 import Downloads from './downloads'; // Import the Downloads component
-import AdminDashboard from './admin/admindashboard'; // Import the AdminDashboard component
+import Profile from './profile'; // Import the Profile component
 
 const App = () => {
     return (
@@ -17,7 +17,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/property-listing" element={<PropertyListing />} />
                 <Route path="/downloads" element={<Downloads />} /> {/* Add the Downloads route */}
-                <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Add the AdminDashboard route */}
+                <Route path="/profile" element={<Profile />} /> {/* Add the Profile route */}
             </Routes>
         </Router>
     );

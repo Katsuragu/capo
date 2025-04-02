@@ -5,7 +5,6 @@ import './signup.css'; // Import the CSS file
 
 const Signup = () => {
     const navigate = useNavigate();
-    
     const [authing, setAuthing] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,24 +12,67 @@ const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const signUpWithEmail = async () => {
+        // Input validation
+        if (!email || !password || !confirmPassword) {
+            setError('All fields are required');
+            return;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            setError('Invalid email format');
+            return;
+        }
+
+        if (!email.endsWith('@gmail.com')) {
+            setError('Email must be a valid @gmail.com address');
+            return;
+        }
+
         if (password !== confirmPassword) {
             setError('Passwords do not match');
+            return;
+        }
+
+        if (password.length < 8) {
+            setError('Password must be at least 8 characters long');
+            return;
+        }
+
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            setError('Password must include at least one special character');
             return;
         }
 
         setAuthing(true);
         setError('');
 
-        // Simulate sign up with email and password
         try {
-            // Replace this with your own sign-up logic
-            console.log('User signed up with email:', email);
-            navigate('/');
+            const response = await fetch('http://localhost/walkin/signup.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log('User signed up with email:', email);
+                setSuccess(true); // Show success message
+                setEmail(''); // Clear input fields
+                setPassword('');
+                setConfirmPassword('');
+            } else {
+                setError(data.error || 'Failed to sign up');
+            }
         } catch (error) {
             console.log(error);
-            setError('Failed to sign up');
+            setError('Failed to connect to the server');
+        } finally {
             setAuthing(false);
         }
     };
@@ -96,16 +138,17 @@ const Signup = () => {
                             className='signup-button'>
                             Sign Up With Email and Password
                         </button>
-                        <div className='signup-login'>
-                    <p className='signup-login-text'>Already have an account? <span className='signup-login-link' onClick={() => navigate('/')}>Log In</span></p>
-                </div>
+                    </div>
+
+                    <div className='signup-login'>
+                        <p className='signup-login-text'>Already have an account? <span className='signup-login-link' onClick={() => navigate('/login')}>Log In</span></p>
                     </div>
                 </div>
-
-                
             </div>
+
+        
         </div>
     );
-}
+};
 
 export default Signup;

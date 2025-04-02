@@ -16,14 +16,8 @@ const Dashboard = () => {
                 <h1>Welcome to WALK-IN</h1>
                 <p>Find your dream home today</p>
                 <div className='dashboard-search'>
-                    <input
-                        type='text'
-                        placeholder='Search...'
-                        className='dashboard-search-input'
-                    />
-                    <button className='dashboard-search-button' onClick={handleSearch}>
-                        <FaSearch />
-                    </button>
+                  
+                
                 </div>
             </header>
             <main className='dashboard-main'>
