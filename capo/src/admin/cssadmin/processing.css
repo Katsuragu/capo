@@ -1,0 +1,113 @@
+/* Main Content */
+.processing-main {
+    flex: 1; /* Allow the main content to grow and fill available space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px; /* Add padding for better spacing */
+    max-height: calc(100vh - 150px); /* Adjust height to fit within the viewport */
+    scrollbar-width: thin; /* For modern browsers */
+    scrollbar-color: #4285f4 #f9f9f9; /* Custom scrollbar colors */
+}
+
+/* Custom Scrollbar for Webkit Browsers */
+.processing-main::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.processing-main::-webkit-scrollbar-thumb {
+    background-color: #4285f4; /* Google blue */
+    border-radius: 4px; /* Rounded scrollbar */
+}
+
+.processing-main::-webkit-scrollbar-track {
+    background-color: #f9f9f9; /* Light background for the track */
+}
+
+/* Reservation Form */
+.reservation-form {
+    background-color: #ffffff;
+    padding: 50px; /* Increased padding for better spacing */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Increased max-width for a larger form */
+    margin: 0 auto 30px; /* Added spacing below the form */
+    display: flex;
+    flex-direction: column; /* Display fields in a single column */
+    gap: 30px; /* Increased gap between form elements */
+    font-family: Arial, sans-serif;
+}
+
+.reservation-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    width: 100%; /* Ensure labels span the full width */
+}
+
+.reservation-form input,
+.reservation-form textarea {
+    padding: 16px; /* Increased padding for larger input fields */
+    font-size: 1.2rem; /* Slightly larger font size */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* Slightly rounded corners */
+    margin-top: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+    width: 100%; /* Make inputs span the full width */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+.reservation-form input:focus,
+.reservation-form textarea:focus {
+    border-color: #4285f4; /* Google blue */
+    box-shadow: 0px 0px 4px rgba(66, 133, 244, 0.5);
+    outline: none;
+}
+
+.reservation-form textarea {
+    resize: none;
+    height: 150px; /* Increased height for better usability */
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* Submit Button */
+.submit-button {
+    padding: 14px 24px; /* Increased padding for a larger button */
+    background-color: #4285f4; /* Google blue */
+    color: white;
+    border: none;
+    border-radius: 6px; /* Slightly rounded corners */
+    cursor: pointer;
+    font-size: 1.2rem; /* Slightly larger font size */
+    font-weight: 500;
+    align-self: flex-end;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; /* Added spacing above the button */
+}
+
+.submit-button:hover {
+    background-color: #357ae8; /* Darker Google blue */
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .processing-main {
+        max-height: calc(100vh - 100px); /* Adjust height for smaller screens */
+    }
+
+    .reservation-form {
+        padding: 30px; /* Adjusted padding for smaller screens */
+    }
+
+    .submit-button {
+        align-self: center;
+        width: 100%;
+    }
+}

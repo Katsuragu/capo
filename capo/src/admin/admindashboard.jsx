@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2'; // Import Bar chart from react-chartjs-2
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -9,19 +9,16 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import Navbar from '../navbar'; // Import the Navbar component
-import './cssadmin/admindashboard.css'; // Import the CSS file
+import AdminNavbar from './AdminNavbar'; // Import the Admin Navbar
+import './cssadmin/admindashboard.css';
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const AdminDashboard = () => {
     const [propertyData, setPropertyData] = useState([]);
+    const [analyticsData, setAnalyticsData] = useState([]);
     const [users, setUsers] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
 
-    // Simulate fetching property data from an API
     useEffect(() => {
         const fetchPropertyData = async () => {
             const mockData = [
@@ -33,10 +30,20 @@ const AdminDashboard = () => {
             setPropertyData(mockData);
         };
 
+        const fetchAnalyticsData = async () => {
+            const mockAnalytics = [
+                { id: 1, property: 'Home', timeSpent: '2 hours' },
+                { id: 2, property: 'Hotel', timeSpent: '1.5 hours' },
+                { id: 3, property: 'Apartment', timeSpent: '3 hours' },
+                { id: 4, property: 'Villa', timeSpent: '4 hours' },
+            ];
+            setAnalyticsData(mockAnalytics);
+        };
+
         fetchPropertyData();
+        fetchAnalyticsData();
     }, []);
 
-    // Simulate fetching user data from an API
     useEffect(() => {
         const fetchUserData = async () => {
             const mockUsers = [
@@ -50,13 +57,12 @@ const AdminDashboard = () => {
         fetchUserData();
     }, []);
 
-    // Prepare data for the Bar chart
     const chartData = {
-        labels: propertyData.map((property) => property.name), // Property names
+        labels: propertyData.map((property) => property.name),
         datasets: [
             {
                 label: 'Property Views',
-                data: propertyData.map((property) => property.views), // Property views
+                data: propertyData.map((property) => property.views),
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
@@ -77,42 +83,40 @@ const AdminDashboard = () => {
         },
     };
 
-    const openModal = (user) => {
-        setSelectedUser(user); // Set the selected user
-        setIsModalOpen(true); // Open the modal
-    };
-
-    const closeModal = () => {
-        setSelectedUser(null); // Clear the selected user
-        setIsModalOpen(false); // Close the modal
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setSelectedUser({ ...selectedUser, [name]: value });
-    };
-
-    const handleSave = () => {
-        // Simulate saving the updated user data
-        setUsers((prevUsers) =>
-            prevUsers.map((user) =>
-                user.id === selectedUser.id ? selectedUser : user
-            )
-        );
-        closeModal();
-    };
-
     return (
         <div className="admin-dashboard-container">
-            <Navbar /> {/* Add the Navbar component */}
+            <AdminNavbar /> {/* Use the Admin Navbar */}
             <header className="admin-dashboard-header">
                 <h1>Admin Dashboard</h1>
                 <p>Welcome to the admin panel. View analytics and manage properties.</p>
             </header>
             <main className="admin-dashboard-main">
                 <section className="admin-dashboard-section">
-                    <div className="chart-container">
-                        <Bar data={chartData} options={chartOptions} />
+                    <div className="chart-and-analytics">
+                        <div className="chart-container">
+                            <Bar data={chartData} options={chartOptions} />
+                        </div>
+                        <div className="analytics-table-container">
+                            <h2>Time Spent Analytics</h2>
+                            <table className="analytics-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Property</th>
+                                        <th>Time Spent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {analyticsData.map((data) => (
+                                        <tr key={data.id}>
+                                            <td>{data.property}</td>
+                                            <td>{data.property}</td>
+                                            <td>{data.timeSpent}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
                 <section className="admin-dashboard-section">
@@ -135,12 +139,7 @@ const AdminDashboard = () => {
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
                                     <td>
-                                        <button
-                                            className="edit-button"
-                                            onClick={() => openModal(user)}
-                                        >
-                                            Edit
-                                        </button>
+                                        <button className="edit-button">Edit</button>
                                         <button className="delete-button">Delete</button>
                                     </td>
                                 </tr>
@@ -149,54 +148,6 @@ const AdminDashboard = () => {
                     </table>
                 </section>
             </main>
-
-            {/* Modal */}
-            {isModalOpen && selectedUser && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div
-                        className="modal-content"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button className="close-button" onClick={closeModal}>
-                            ✖
-                        </button>
-                        <h2>Edit User</h2>
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                name="name"
-                                value={selectedUser.name}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                name="email"
-                                value={selectedUser.email}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <label>
-                            Role:
-                            <input
-                                type="text"
-                                name="role"
-                                value={selectedUser.role}
-                                onChange={handleInputChange}
-                            />
-                        </label>
-                        <button className="save-button" onClick={handleSave}>
-                            Save
-                        </button>
-                        <button className="cancel-button" onClick={closeModal}>
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

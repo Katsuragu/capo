@@ -136,7 +136,7 @@ const Signup = () => {
                             onClick={signUpWithEmail}
                             disabled={authing}
                             className='signup-button'>
-                            Sign Up With Email and Password
+                            Sign Up 
                         </button>
                     </div>
 
