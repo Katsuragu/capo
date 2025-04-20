@@ -9,24 +9,25 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='navbar'>
-            <div className='navbar-brand'>Walk-IN</div>
-            <ul className='navbar-nav'>
-                <li className='nav-item'><a href='/dashboard'>Home</a></li>
-                <li className='nav-item'><a href='/property-listing'>Property</a></li>
-                <li className='nav-item'><a href='/downloads' className='active'>Downloads</a></li>
+        <nav className="navbar">
+            <div className="navbar-brand">Walk-IN</div>
+            <ul className="navbar-nav">
+                <li className="nav-item"><a href="/dashboard">Home</a></li>
+                <li className="nav-item"><a href="/property-listing">Property</a></li>
+                <li className="nav-item"><a href="/processing">Processing</a></li> {/* Added Processing Link */}
+                <li className="nav-item"><a href="/downloads">Downloads</a></li>
             </ul>
-            <div className='user-icon' onClick={toggleDropdown}>
-                <span className='text-black'>👤</span>
+            <div className="user-icon" onClick={toggleDropdown}>
+                <span className="text-black">👤</span>
                 {dropdownOpen && (
-                    <div className='dropdown-menu'>
-                        <a href='/profile' className='dropdown-item'>Profile</a>
-                        <a href='/' className='dropdown-item'>Logout</a>
+                    <div className="dropdown-menu">
+                        <a href="/profile" className="dropdown-item">Profile</a>
+                        <a href="/" className="dropdown-item">Logout</a>
                     </div>
                 )}
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

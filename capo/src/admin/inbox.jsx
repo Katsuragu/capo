@@ -59,20 +59,20 @@ const Inbox = () => {
                         </ul>
                     </div>
                     <div className="inbox-details">
-                        {selectedMessage ? (
-                            <div className="message-details">
-                                <button className="close-button" onClick={handleCloseMessage}>
-                                    &times;
-                                </button>
-                                <h3>{selectedMessage.subject}</h3>
-                                <p><strong>From:</strong> {selectedMessage.sender}</p>
-                                <p><strong>Message:</strong></p>
-                                <p>{selectedMessage.content}</p>
-                            </div>
-                        ) : (
-                            <p>Select a message to view its details.</p>
-                        )}
-                    </div>
+    {selectedMessage ? (
+        <div className="message-details" style={{ position: 'relative' }}>
+            <button className="close-button" onClick={handleCloseMessage}>
+                &times;
+            </button>
+            <h3>{selectedMessage.subject}</h3>
+            <p><strong>From:</strong> {selectedMessage.sender}</p>
+            <p><strong>Message:</strong></p>
+            <p>{selectedMessage.content}</p>
+        </div>
+    ) : (
+        <p>Select a message to view its details.</p>
+    )}
+</div>
                 </div>
             </main>
         </div>

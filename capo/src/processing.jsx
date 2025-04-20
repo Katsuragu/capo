@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AdminNavbar from './AdminNavbar'; // Import the Admin Navbar
-import './cssadmin/processing.css'; // Import the CSS file for Processing
+import Navbar from './navbar'; // Import the Navbar component
+import './processing.css'; // Import the CSS file for Processing
 
 const Processing = () => {
     const [reservation, setReservation] = useState({
@@ -44,7 +44,7 @@ const Processing = () => {
 
     return (
         <div className="processing-container">
-            <AdminNavbar /> {/* Use the Admin Navbar */}
+            <Navbar /> {/* Use the Navbar */}
             <main className="processing-main">
                 <h1>Reservation Processing</h1>
                 <form className="reservation-form" onSubmit={handleSubmit}>

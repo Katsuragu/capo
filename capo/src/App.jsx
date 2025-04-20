@@ -8,7 +8,7 @@ import Downloads from './downloads';
 import Profile from './profile';
 import AdminDashboard from './admin/admindashboard';
 import Messaging from './admin/Messaging';
-import Processing from './admin/processing'; // Import the Processing component
+import Processing from './processing'; // Import the Processing component
 import Inbox from './admin/inbox'; // Import the Inbox component
 
 const App = () => {
@@ -24,8 +24,8 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/messaging" element={<Messaging />} />
-                <Route path="/processing" element={<Processing />} />
                 <Route path="/inbox" element={<Inbox />} /> {/* Inbox Route */}
+                <Route path="/processing" element={<Processing />} /> {/* Processing Route */}
             </Routes>
         </Router>
     );

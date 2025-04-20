@@ -110,17 +110,21 @@
     color: #555;
 }
 
+/* Close Button */
 .close-button {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 2rem; /* Increased font size for a bigger button */
     color: #999;
     cursor: pointer;
-    float: right;
+    position: absolute; /* Position it inside the container */
+    top: 10px; /* Adjust the top position */
+    right: 10px; /* Adjust the right position */
+    z-index: 10; /* Ensure it appears above other elements */
 }
 
 .close-button:hover {
-    color: #333;
+    color: #333; /* Darker color on hover */
 }
 /* Search Bar */
 .search-bar {

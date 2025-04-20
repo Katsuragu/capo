@@ -14,8 +14,7 @@ const AdminNavbar = () => {
             <ul className="admin-navbar-nav">
                 <li className="nav-item"><a href="/admin-dashboard">Dashboard</a></li>
                 <li className="nav-item"><a href="/messaging">Messaging</a></li>
-                <li className="nav-item"><a href="/processing">Processing</a></li>
-                <li className="nav-item"><a href="/inbox">Inbox</a></li> {/* Inbox Tab */}
+                <li className="nav-item"><a href="/inbox">Inbox</a></li> {/* Correct Inbox Link */}
             </ul>
             <div className="admin-user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>

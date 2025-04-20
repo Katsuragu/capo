@@ -143,3 +143,21 @@ body, html {
 .footer-link:hover {
   text-decoration: underline;
 }
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  color: rgb(231, 231, 231); /* Changed text color to black */
+}
+.dashboard-section2 {
+  background-color: #145A4C; 
+  padding: 85px;
+  color: white; /* Ensure all text inside this section is white */
+}
+
+.dashboard-section2 h2 {
+  color: white; /* Ensure the heading is white */
+}
+
+.dashboard-section2 p {
+  color: white; /* Ensure the paragraph text is white */
+}
