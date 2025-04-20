@@ -1,0 +1,161 @@
+/* Admin Dashboard Container */
+.admin-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Admin Dashboard Header */
+.admin-dashboard-header {
+    background-color: #4285f4; /* Google blue */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.admin-dashboard-header p {
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+/* Admin Dashboard Main */
+.admin-dashboard-main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Inbox Container */
+.inbox-container {
+    display: flex;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Inbox List */
+.inbox-list {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inbox-list h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.inbox-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.inbox-list li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.inbox-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #333;
+}
+
+.message-subject {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.message-timestamp {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Inbox Details */
+.inbox-details {
+    flex: 2;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.message-details p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    float: right;
+}
+
+.close-button:hover {
+    color: #333;
+}
+/* Search Bar */
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.search-bar:focus {
+    border-color: #4285f4; /* Google blue */
+    outline: none;
+    box-shadow: 0px 0px 4px rgba(66, 133, 244, 0.5);
+}
+/* Admin Dashboard Header */
+.admin-dashboard-header {
+    background-color: #145A4C; /* Match the Admin Navbar color */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white; /* Ensure text is white */
+}
+
+.admin-dashboard-header p {
+    font-size: 1rem;
+    color: #e0e0e0; /* Light gray for the description */
+}   

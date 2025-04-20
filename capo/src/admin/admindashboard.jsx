@@ -18,6 +18,8 @@ const AdminDashboard = () => {
     const [propertyData, setPropertyData] = useState([]);
     const [analyticsData, setAnalyticsData] = useState([]);
     const [users, setUsers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState(null); // State for the selected user
+    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
     useEffect(() => {
         const fetchPropertyData = async () => {
@@ -32,10 +34,10 @@ const AdminDashboard = () => {
 
         const fetchAnalyticsData = async () => {
             const mockAnalytics = [
-                { id: 1, property: 'Home', timeSpent: '2 hours' },
-                { id: 2, property: 'Hotel', timeSpent: '1.5 hours' },
-                { id: 3, property: 'Apartment', timeSpent: '3 hours' },
-                { id: 4, property: 'Villa', timeSpent: '4 hours' },
+                { id: 1, user: 'John Doe', property: 'Home', timeSpent: '2 hours' },
+                { id: 2, user: 'Jane Smith', property: 'Hotel', timeSpent: '1.5 hours' },
+                { id: 3, user: 'Alice Johnson', property: 'Apartment', timeSpent: '3 hours' },
+                { id: 4, user: 'John Doe', property: 'Villa', timeSpent: '4 hours' },
             ];
             setAnalyticsData(mockAnalytics);
         };
@@ -56,6 +58,25 @@ const AdminDashboard = () => {
 
         fetchUserData();
     }, []);
+
+    const handleEditUser = (user) => {
+        setSelectedUser(user);
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setSelectedUser(null);
+        setIsModalOpen(false);
+    };
+
+    const handleSaveChanges = () => {
+        const updatedUsers = users.map((user) =>
+            user.id === selectedUser.id ? selectedUser : user
+        );
+        setUsers(updatedUsers);
+        setIsModalOpen(false);
+        alert('User details updated successfully!');
+    };
 
     const chartData = {
         labels: propertyData.map((property) => property.name),
@@ -109,7 +130,7 @@ const AdminDashboard = () => {
                                 <tbody>
                                     {analyticsData.map((data) => (
                                         <tr key={data.id}>
-                                            <td>{data.property}</td>
+                                            <td>{data.user}</td>
                                             <td>{data.property}</td>
                                             <td>{data.timeSpent}</td>
                                         </tr>
@@ -139,7 +160,12 @@ const AdminDashboard = () => {
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
                                     <td>
-                                        <button className="edit-button">Edit</button>
+                                        <button
+                                            className="edit-button"
+                                            onClick={() => handleEditUser(user)}
+                                        >
+                                            Edit
+                                        </button>
                                         <button className="delete-button">Delete</button>
                                     </td>
                                 </tr>
@@ -148,6 +174,56 @@ const AdminDashboard = () => {
                     </table>
                 </section>
             </main>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <button className="close-button" onClick={handleModalClose}>
+                            &times;
+                        </button>
+                        <h2>Edit User</h2>
+                        <label>
+                            Name:
+                            <input
+                                type="text"
+                                value={selectedUser.name}
+                                onChange={(e) =>
+                                    setSelectedUser({ ...selectedUser, name: e.target.value })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Email:
+                            <input
+                                type="email"
+                                value={selectedUser.email}
+                                onChange={(e) =>
+                                    setSelectedUser({ ...selectedUser, email: e.target.value })
+                                }
+                            />
+                        </label>
+                        <label>
+                            Role:
+                            <select
+                                value={selectedUser.role}
+                                onChange={(e) =>
+                                    setSelectedUser({ ...selectedUser, role: e.target.value })
+                                }
+                            >
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                            </select>
+                        </label>
+                        <button className="save-button" onClick={handleSaveChanges}>
+                            Save Changes
+                        </button>
+                        <button className="cancel-button" onClick={handleModalClose}>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

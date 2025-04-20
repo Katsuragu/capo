@@ -47,7 +47,6 @@ const Processing = () => {
             <AdminNavbar /> {/* Use the Admin Navbar */}
             <main className="processing-main">
                 <h1>Reservation Processing</h1>
-                <p>Fill out the form below to process a reservation.</p>
                 <form className="reservation-form" onSubmit={handleSubmit}>
                     <div className="form-row">
                         <label>

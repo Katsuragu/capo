@@ -14,8 +14,8 @@ const AdminNavbar = () => {
             <ul className="admin-navbar-nav">
                 <li className="nav-item"><a href="/admin-dashboard">Dashboard</a></li>
                 <li className="nav-item"><a href="/messaging">Messaging</a></li>
-                <li className="nav-item"><a href="/add-properties">Add Properties</a></li>
-                <li className="nav-item"><a href="/processing">Processing</a></li> {/* New Processing Tab */}
+                <li className="nav-item"><a href="/processing">Processing</a></li>
+                <li className="nav-item"><a href="/inbox">Inbox</a></li> {/* Inbox Tab */}
             </ul>
             <div className="admin-user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>

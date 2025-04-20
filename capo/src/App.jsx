@@ -8,8 +8,8 @@ import Downloads from './downloads';
 import Profile from './profile';
 import AdminDashboard from './admin/admindashboard';
 import Messaging from './admin/Messaging';
-import AddProperties from './admin/addproperties';
 import Processing from './admin/processing'; // Import the Processing component
+import Inbox from './admin/inbox'; // Import the Inbox component
 
 const App = () => {
     return (
@@ -24,8 +24,8 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/messaging" element={<Messaging />} />
-                <Route path="/add-properties" element={<AddProperties />} />
-                <Route path="/processing" element={<Processing />} /> {/* Add Processing Route */}
+                <Route path="/processing" element={<Processing />} />
+                <Route path="/inbox" element={<Inbox />} /> {/* Inbox Route */}
             </Routes>
         </Router>
     );
