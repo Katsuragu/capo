@@ -5,14 +5,14 @@ body, html {
   font-family: Arial, sans-serif;
   background-color: #f8f8f8;
   height: 100%;
-  overflow: hidden; /* Prevent double scrollbars */
+  /* Removed overflow: hidden; */
 }
 
 .downloads-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden; /* Prevent double scrollbars */
+  min-height: 100vh;
+  /* Removed overflow: hidden; */
 }
 
 .navbar {
@@ -40,11 +40,7 @@ body, html {
   padding: 10px;
 }
 
-.nav-link:hover {
-  background-color: #065e5c;
-  border-radius: 5px;
-}
-
+.nav-link:hover,
 .nav-link.active {
   background-color: #065e5c;
   border-radius: 5px;
@@ -63,14 +59,16 @@ body, html {
 .hero-section {
   position: relative;
   width: 100%;
-  height: calc(100vh - 60px); /* Adjust height to fit within viewport */
-
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to the left */
-  text-align: left; /* Align text to the left */
+  justify-content: flex-start;
+  text-align: left;
   color: white;
-  padding-left: 2rem; /* Add padding to the left */
+  padding-left: 2rem;
+  /* Optional: Add a background image */
+  /* background: url('/images/your-bg.jpg') center/cover no-repeat; */
+  min-height: 400px;
 }
 
 .overlay {
@@ -93,6 +91,7 @@ body, html {
 .hero-subtitle {
   margin-top: 1rem;
   font-size: 1.125rem;
+  color: rgb(231, 231, 231);
 }
 
 .app-buttons {
@@ -102,8 +101,8 @@ body, html {
 }
 
 .app-button {
-  padding: 1rem 2rem; /* Increase padding for larger buttons */
-  font-size: 1.25rem; /* Increase font size */
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
   border: none;
   border-radius: 0.25rem;
   display: flex;
@@ -123,41 +122,38 @@ body, html {
 }
 
 .footer {
-  display: flex;
-  justify-content: flex-start; /* Align items to the left */
-  gap: 1.5rem;
   background-color: transparent;
   color: white;
-  padding: 1rem 2rem; /* Add padding to the left */
-  position: absolute;
-  bottom: 0;
+  padding: 1rem 2rem;
   width: 100%;
+  /* Use margin-top: auto to push footer to bottom if content is short */
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .footer-link {
   color: white;
   text-decoration: none;
-  margin: 0 1rem; 
+  margin: 0 1rem;
 }
 
 .footer-link:hover {
   text-decoration: underline;
 }
-.hero-subtitle {
-  margin-top: 1rem;
-  font-size: 1.125rem;
-  color: rgb(231, 231, 231); /* Changed text color to black */
-}
+
 .dashboard-section2 {
-  background-color: #145A4C; 
+  background-color: #145A4C;
   padding: 85px;
-  color: white; /* Ensure all text inside this section is white */
+  color: white;
 }
 
-.dashboard-section2 h2 {
-  color: white; /* Ensure the heading is white */
-}
-
+.dashboard-section2 h2,
 .dashboard-section2 p {
-  color: white; /* Ensure the paragraph text is white */
+  color: white;
 }
