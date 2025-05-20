@@ -1,0 +1,147 @@
+/* General Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2E2E2C;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dashboard-header {
+  background-color: #2E2E2C;
+  color: white;
+  padding: 50px 10vw 30px 10vw;
+  text-align: center;
+  animation: slideDown 1s ease-in-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.dashboard-search {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dashboard-search-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px 0 0 20px;
+  width: 300px;
+  max-width: 80vw;
+}
+
+.dashboard-search-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  background-color: #2E2E2C;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.dashboard-search-button:hover {
+  background-color: #444;
+}
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.dashboard-section,
+.dashboard-section2 {
+  background-color: #2E2E2C;
+  color: white;
+  padding: 40px 10vw;
+  box-sizing: border-box;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.dashboard-section2 {
+  padding-top: 0;
+}
+
+.dashboard-footer {
+  background-color: #2E2E2C;
+  color: white;
+  text-align: left;
+  padding: 10px 10vw;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #4CAF50;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .dashboard-header,
+  .dashboard-section,
+  .dashboard-section2,
+  .dashboard-footer {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-header,
+  .dashboard-section,
+  .dashboard-section2,
+  .dashboard-footer {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .dashboard-header {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  .dashboard-section,
+  .dashboard-section2 {
+    padding: 20px 2vw;
+  }
+  .dashboard-search-input {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.95rem;
+  }
+  .dashboard-search-button {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+}

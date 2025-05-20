@@ -1,0 +1,136 @@
+/* General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2E2E2C;
+    height: 100%;
+    overflow: hidden;
+}
+
+.navbar {
+    background-color: #2E2E2C;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 1rem;
+    justify-content: left;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+.nav-item a:hover {
+    background-color: #444;
+    border-radius: 5px;
+    text-decoration: underline;
+}
+
+.nav-item a.active {
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.user-icon {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    background-color: #2E2E2C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #444;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #2E2E2C;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 5vw;
+    }
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+    }
+    .nav-item {
+        margin-left: 0;
+        width: 100%;
+    }
+    .nav-item a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1.1rem;
+    }
+    .user-icon {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 10px 2vw;
+    }
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    .nav-item a {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+}
+
+

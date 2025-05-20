@@ -1,0 +1,180 @@
+/* General Container */
+.messaging-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height for the container */
+    background-color: #2E2E2C; /* Updated background color */
+    overflow-y: auto; /* Enable vertical scrolling for the entire page */
+    animation: fadeIn 1.5s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Header */
+.messaging-header {
+    background-color: #2E2E2C; /* Updated background color */
+    color: white; /* Updated text color */
+    padding: 20px;
+    text-align: center;
+    animation: slideDown 1s ease-in-out; /* Add slide-down animation */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.messaging-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.messaging-header p {
+    font-size: 1rem;
+    color: #e0e0e0; /* Light gray for contrast */
+}
+
+/* Main Content */
+.messaging-main {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling for the main content */
+}
+
+/* Inbox Section */
+.inbox-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #2E2E2C; /* Updated background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable scrolling for the inbox section */
+    animation: fadeInUp 1s ease-in-out; /* Add fade-in-up animation */
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.inbox-item {
+    padding: 15px;
+    border: 1px solid #444; /* Darker border for contrast */
+    border-radius: 6px;
+    background-color: #2E2E2C; /* Updated background color */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    color: white; /* Updated text color */
+}
+
+.inbox-item:hover {
+    background-color: #444; /* Slightly darker hover effect */
+    transform: scale(1.02); /* Slightly enlarge on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Messaging Section */
+.messaging-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white; /* Updated background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable scrolling for the messaging section */
+    animation: fadeInUp 1s ease-in-out; /* Add fade-in-up animation */
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    background-color: #444; /* Slightly darker background for bubbles */
+    color: white; /* Updated text color */
+}
+
+.message-bubble.sent {
+    background-color: #2E2E2C; /* Updated background color */
+    color: white; /* Updated text color */
+    align-self: flex-end;
+}
+
+.message-bubble.received {
+    background-color: #444; /* Slightly darker background for received messages */
+    color: white; /* Updated text color */
+    align-self: flex-start;
+}
+
+/* Message Input */
+.message-input {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.message-input textarea {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #444; /* Darker border for contrast */
+    border-radius: 8px;
+    resize: none;
+    height: 50px;
+    background-color: #2E2E2C; /* Updated background color */
+    color: white; /* Updated text color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-input textarea:focus {
+    border-color: #666; /* Slightly lighter border on focus */
+    box-shadow: 0px 0px 8px rgba(102, 102, 102, 0.5);
+    outline: none;
+}
+
+.message-input button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #444; /* Slightly darker button background */
+    color: white; /* Updated text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.message-input button:hover {
+    background-color: #666; /* Slightly lighter hover effect */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}

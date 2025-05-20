@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "capo"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "capo-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]

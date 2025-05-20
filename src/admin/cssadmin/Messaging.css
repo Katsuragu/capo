@@ -1,0 +1,263 @@
+/* General Container */
+.messaging-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height for the container */
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Enable vertical scrolling for the entire page */
+}
+
+/* Header */
+.messaging-header {
+    background-color: #145A4C; /* Match the Admin Navbar color */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.messaging-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.messaging-header p {
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+/* Main Content */
+.messaging-main {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling for the main content */
+}
+
+/* Inbox Section */
+.inbox-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable scrolling for the inbox section */
+}
+
+.inbox-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.inbox-list h2 {
+    margin-bottom: 10px;
+    color: #145A4C;
+}
+
+.search-bar {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.inbox-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.inbox-list li {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.inbox-list li:hover {
+    background: #f5f5f5;
+}
+
+.message-sender {
+    font-weight: bold;
+    color: #1565c0;
+}
+
+.message-subject {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Messaging Section */
+.messaging-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable scrolling for the messaging section */
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Message Row and Sender Label */
+.message-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.admin-row {
+    align-items: flex-end;
+}
+
+.message-sender-label {
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: #1565c0;
+    padding: 0 4px;
+}
+
+.message-sender-label.left {
+    align-self: flex-start;
+    color: #333;
+}
+
+.message-sender-label.right {
+    align-self: flex-end;
+    color: #1565c0;
+}
+
+/* Message Bubbles */
+.message {
+    max-width: 60%;
+    padding: 10px 16px;
+    border-radius: 16px;
+    margin-bottom: 4px;
+    word-break: break-word;
+    position: relative;
+    font-size: 1rem;
+}
+
+.admin-message {
+    align-self: flex-end;
+    background: #e3f2fd;
+    color: #1565c0;
+    text-align: right;
+    border-top-right-radius: 0;
+}
+
+.user-message {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    text-align: left;
+    border-top-left-radius: 0;
+}
+
+.message-timestamp {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* Message Input */
+.message-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.message-input textarea {
+    flex: 1;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+    min-height: 40px;
+    max-height: 100px;
+}
+
+.message-input button {
+    background-color: #145A4C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.message-input button:hover {
+    background-color: #1565c0;
+}
+
+/* Scrollbar Styling */
+.messaging-container::-webkit-scrollbar,
+.messaging-main::-webkit-scrollbar,
+.inbox-section::-webkit-scrollbar,
+.messaging-section::-webkit-scrollbar,
+.inbox-list ul::-webkit-scrollbar,
+.messages-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messaging-container::-webkit-scrollbar-thumb,
+.messaging-main::-webkit-scrollbar-thumb,
+.inbox-section::-webkit-scrollbar-thumb,
+.messaging-section::-webkit-scrollbar-thumb,
+.inbox-list ul::-webkit-scrollbar-thumb,
+.messages-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.messaging-container::-webkit-scrollbar-thumb:hover,
+.messaging-main::-webkit-scrollbar-thumb:hover,
+.inbox-section::-webkit-scrollbar-thumb:hover,
+.messaging-section::-webkit-scrollbar-thumb:hover,
+.inbox-list ul::-webkit-scrollbar-thumb:hover,
+.messages-list::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+/* Add to your Messaging.css */
+.archive-chat-btn {
+    margin-left: 10px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.archive-chat-btn:hover {
+    background: #c62828;
+}

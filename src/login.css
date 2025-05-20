@@ -1,0 +1,230 @@
+/* General Styles */
+body {
+    background-color: #2E2E2C;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #2E2E2C;
+}
+
+.login-left {
+    background-image: url('src/images/screenshot.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #2E2E2C;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-right {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 5vw;
+    box-sizing: border-box;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.login-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.login-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
+.login-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.login-input {
+    width: 100%;
+    color: black;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid gray;
+    outline: none;
+    font-size: 1rem;
+}
+
+.login-password-container {
+    position: relative;
+    width: 100%;
+}
+
+.login-show-password {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.login-button {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid black;
+    color: black;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.login-error {
+    color: red;
+    margin-bottom: 1rem;
+}
+
+.login-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.login-divider-line {
+    width: 100%;
+    height: 1px;
+    background-color: gray;
+}
+
+.login-divider-text {
+    font-size: 1.125rem;
+    position: absolute;
+    color: gray;
+    background-color: white;
+    padding: 0 0.5rem;
+}
+
+.login-signup {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.login-signup-text {
+    font-size: 0.875rem;
+    color: gray;
+}
+
+.login-signup-link {
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.google-login-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.google-login-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .login-container {
+        grid-template-columns: 1fr;
+    }
+    .login-left {
+        display: none;
+    }
+    .login-right {
+        padding: 40px 8vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-right {
+        padding: 20px 3vw;
+    }
+    .login-form {
+        max-width: 100%;
+        padding: 0;
+    }
+    .login-title {
+        font-size: 2rem;
+    }
+    .login-subtitle {
+        font-size: 1rem;
+    }
+    .login-button {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+    .login-signup {
+        margin-top: 1.5rem;
+    }
+}
