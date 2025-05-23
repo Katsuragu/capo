@@ -14,8 +14,10 @@ const Navbar = () => {
             <ul className="navbar-nav">
                 <li className="nav-item"><a href="/dashboard">Home</a></li>
                 <li className="nav-item"><a href="/property-listing">Property</a></li>
-                <li className="nav-item"><a href="/processing">Processing</a></li> {/* Added Processing Link */}
+                <li className="nav-item"><a href="/processing">Processing</a></li>
                 <li className="nav-item"><a href="/downloads">Downloads</a></li>
+                <li className="nav-item"><a href="/inquiry">Inquiry</a></li>
+                <li className="nav-item"><a href="/user-messaging">Messages</a></li> {/* Added User Messaging Link */}
             </ul>
             <div className="user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>

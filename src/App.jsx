@@ -8,11 +8,13 @@ import Downloads from './downloads';
 import Profile from './profile';
 import AdminDashboard from './admin/admindashboard';
 import Messaging from './admin/Messaging';
-import Processing from './processing'; // Import the Processing component
-import Inbox from './admin/inbox'; // Import the Inbox component
-import UserManagement from './admin/Usermanagement'; // Import the UserManagement component
-import UserMessaging from './usermessaging'; // Import the UserMessaging component
-import Reservation from './admin/Reservation'; // Add this import
+import Processing from './processing';
+import Inbox from './admin/inbox';
+import UserManagement from './admin/Usermanagement';
+import UserMessaging from './usermessaging';
+import Reservation from './admin/Reservation';
+import InquiryForm from './inquiry';
+import AdminInquiries from './admin/adminInquiries'; // <-- Import admin inquiries
 
 const App = () => {
     return (
@@ -31,7 +33,9 @@ const App = () => {
                 <Route path="/processing" element={<Processing />} />
                 <Route path="/user-management" element={<UserManagement />} />
                 <Route path="/user-messaging" element={<UserMessaging />} />
-                <Route path="/reservation" element={<Reservation />} /> {/* Reservation Route */}
+                <Route path="/reservation" element={<Reservation />} />
+                <Route path="/inquiry" element={<InquiryForm />} />
+                <Route path="/admin-inquiries" element={<AdminInquiries />} /> {/* <-- Admin Inquiries route */}
             </Routes>
         </Router>
     );

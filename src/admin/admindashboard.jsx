@@ -48,7 +48,31 @@ const AdminDashboard = () => {
                 { id: 3, user: 'Alice Johnson', property: 'Apartment', timeSpent: '3 hours' },
                 { id: 4, user: 'John Doe', property: 'Villa', timeSpent: '4 hours' },
             ];
-            setAnalyticsData(mockAnalytics);
+            // Improved: Calculate total time spent per user per property (in hours)
+            const analyticsMap = {};
+            mockAnalytics.forEach((entry) => {
+                const key = `${entry.user}-${entry.property}`;
+                const hoursMatch = entry.timeSpent.match(/([\d.]+)\s*hour/);
+                const minsMatch = entry.timeSpent.match(/([\d.]+)\s*min/);
+                let hours = 0;
+                if (hoursMatch) hours += parseFloat(hoursMatch[1]);
+                if (minsMatch) hours += parseFloat(minsMatch[1]) / 60;
+                if (!analyticsMap[key]) {
+                    analyticsMap[key] = {
+                        user: entry.user,
+                        property: entry.property,
+                        totalHours: 0,
+                    };
+                }
+                analyticsMap[key].totalHours += hours;
+            });
+            const improvedAnalytics = Object.values(analyticsMap).map((item, idx) => ({
+                id: idx + 1,
+                user: item.user,
+                property: item.property,
+                totalHours: item.totalHours.toFixed(2),
+            }));
+            setAnalyticsData(improvedAnalytics);
         };
 
         fetchPropertyData();
@@ -101,7 +125,7 @@ const AdminDashboard = () => {
             </header>
             <main className="admin-dashboard-main">
                 {/* Card View for User Count */}
-                <div className="dashboard-cards">
+                <div className="dashboard-cards" style={{ display: 'flex', justifyContent: 'center' }}>
                     <div className="dashboard-card">
                         <div className="dashboard-card-title">Total Users</div>
                         <div className="dashboard-card-value">{userCount}</div>
@@ -119,17 +143,23 @@ const AdminDashboard = () => {
                                     <tr>
                                         <th>User</th>
                                         <th>Property</th>
-                                        <th>Time Spent</th>
+                                        <th>Total Time Spent (hours)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {analyticsData.map((data) => (
-                                        <tr key={data.id}>
-                                            <td>{data.user}</td>
-                                            <td>{data.property}</td>
-                                            <td>{data.timeSpent}</td>
+                                    {analyticsData.length === 0 ? (
+                                        <tr>
+                                            <td colSpan="3" style={{ textAlign: 'center' }}>No data</td>
                                         </tr>
-                                    ))}
+                                    ) : (
+                                        analyticsData.map((data) => (
+                                            <tr key={data.id}>
+                                                <td>{data.user}</td>
+                                                <td>{data.property}</td>
+                                                <td>{data.totalHours}</td>
+                                            </tr>
+                                        ))
+                                    )}
                                 </tbody>
                             </table>
                         </div>

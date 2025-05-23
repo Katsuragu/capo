@@ -24,6 +24,14 @@ const UserMessaging = () => {
     // Fetch inboxes for this user (for demo, just use their UID as inbox)
     const inboxes = [{ id: userUid, subject: 'Admin Messages', sender: 'Admin', timestamp: '' }];
 
+    // Auto-select inbox on load
+    useEffect(() => {
+        if (userUid) {
+            setSelectedInboxId(userUid);
+            setIsMessagingVisible(true);
+        }
+    }, [userUid]);
+
     // Real-time fetch messages for the selected inbox
     useEffect(() => {
         if (!selectedInboxId) {
@@ -97,7 +105,7 @@ const UserMessaging = () => {
                                     key={message.id}
                                     className={`message ${message.from === 'admin' ? 'admin-message' : 'user-message'}`}
                                 >
-                                    <strong>{message.from}:</strong>
+                                    <strong>{message.from === 'admin' ? 'Admin' : 'You'}:</strong>
                                     <p>{message.text}</p>
                                 </div>
                             ))}
