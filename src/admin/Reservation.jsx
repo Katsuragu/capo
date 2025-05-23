@@ -46,8 +46,8 @@ const Reservation = () => {
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Contact Number</th>
-                            <th>Move-in Date</th>
                             <th>Property Model</th>
+                            <th>Callback Date</th>
                             <th>Callback Time</th>
                             <th>Additional Message</th>
                         </tr>
@@ -63,9 +63,9 @@ const Reservation = () => {
                                     <td>{r.fullName}</td>
                                     <td>{r.email}</td>
                                     <td>{r.contactNumber}</td>
-                                    <td>{r.moveInDate}</td>
                                     <td>{r.propertyModel}</td>
-                                    <td>{r.callbackTime}</td>
+                                    <td>{r.callbackDate || ''}</td>
+                                    <td>{r.callbackTime || ''}</td>
                                     <td>{r.additionalMessage}</td>
                                 </tr>
                             ))

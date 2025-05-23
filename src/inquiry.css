@@ -1,0 +1,138 @@
+.inquiry-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.07);
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+@media (min-width: 900px) {
+  .inquiry-container {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+.heading {
+  font-size: 2.2rem;
+  color: #14532d;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.form-section,
+.contact-section {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.04);
+  min-width: 320px;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: #14532d;
+  letter-spacing: 0.5px;
+}
+
+input, select, textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #b5b5b5;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f6f6f6;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border: 1.5px solid #16a34a;
+  outline: none;
+  background: #fff;
+}
+
+.required {
+  color: #e11d48;
+  margin-left: 0.25rem;
+}
+
+.success-message {
+  background-color: #16a34a;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+}
+
+.cloudflare {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.terms {
+  font-size: 0.95rem;
+  color: #333;
+  margin-top: 1rem;
+  background: #f3f4f6;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+.terms a {
+  color: #2563eb;
+  text-decoration: underline;
+  margin: 0 0.25rem;
+}
+
+.contact-info {
+  margin-bottom: 1.5rem;
+}
+
+.contact-info h3 {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 0.25rem;
+  color: #14532d;
+}
+
+.map-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+}
+
+@media (max-width: 899px) {
+  .form-section,
+  .contact-section {
+    min-width: 0;
+    padding: 1.2rem 0.7rem;
+  }
+  .inquiry-container {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+}

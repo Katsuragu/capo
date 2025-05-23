@@ -17,6 +17,7 @@ const AdminNavbar = () => {
                 <li className="nav-item"><Link to="/user-management">User Management</Link></li>
                 <li className="nav-item"><Link to="/messaging">Messaging</Link></li>
                 <li className="nav-item"><Link to="/reservation">Reservation</Link></li>
+                <li className="nav-item"><Link to="/admin-inquiries">Inquiries</Link></li> {/* Added Inquiries */}
             </ul>
             <div className="user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>

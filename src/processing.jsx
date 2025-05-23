@@ -16,9 +16,9 @@ const Processing = () => {
         fullName: '',
         email: '',
         contactNumber: '',
-        moveInDate: '',
         propertyModel: '',
         additionalMessage: '',
+        callbackDate: '',
         callbackTime: '',
     });
 
@@ -33,7 +33,6 @@ const Processing = () => {
             reservation.fullName &&
             reservation.email &&
             reservation.contactNumber &&
-            reservation.moveInDate &&
             reservation.propertyModel
         ) {
             try {
@@ -49,9 +48,9 @@ const Processing = () => {
                     fullName: '',
                     email: '',
                     contactNumber: '',
-                    moveInDate: '',
                     propertyModel: '',
                     additionalMessage: '',
+                    callbackDate: '',
                     callbackTime: '',
                 });
             } catch (error) {
@@ -105,18 +104,6 @@ const Processing = () => {
                             />
                         </label>
                         <label>
-                            Preferred Move-in Date:
-                            <input
-                                type="date"
-                                name="moveInDate"
-                                value={reservation.moveInDate}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div className="form-row">
-                        <label>
                             Chosen Property Model:
                             <input
                                 type="text"
@@ -125,6 +112,17 @@ const Processing = () => {
                                 onChange={handleInputChange}
                                 placeholder="Enter property model"
                                 required
+                            />
+                        </label>
+                    </div>
+                    <div className="form-row">
+                        <label>
+                            Preferred Date for Callback/Site Visit (optional):
+                            <input
+                                type="date"
+                                name="callbackDate"
+                                value={reservation.callbackDate}
+                                onChange={handleInputChange}
                             />
                         </label>
                         <label>

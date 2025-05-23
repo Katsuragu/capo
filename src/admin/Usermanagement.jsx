@@ -104,7 +104,6 @@ const UserManagement = () => {
                 <table className="user-table">
                     <thead>
                         <tr>
-                            <th>UID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -112,28 +111,33 @@ const UserManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredUsers.map((user) => (
-                            <tr key={user.id}>
-                                <td>{user.id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td>
-                                    <button
-                                        className="edit-button"
-                                        onClick={() => handleEditUser(user)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="delete-button"
-                                        onClick={() => handleDeleteUser(user.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
+                        {filteredUsers.length === 0 ? (
+                            <tr>
+                                <td colSpan="4" style={{ textAlign: 'center' }}>No users found.</td>
                             </tr>
-                        ))}
+                        ) : (
+                            filteredUsers.map((user) => (
+                                <tr key={user.id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td>
+                                        <button
+                                            className="edit-button"
+                                            onClick={() => handleEditUser(user)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="delete-button"
+                                            onClick={() => handleDeleteUser(user.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </main>

@@ -27,6 +27,7 @@ const AdminDashboard = () => {
     const [propertyData, setPropertyData] = useState([]);
     const [analyticsData, setAnalyticsData] = useState([]);
     const [userCount, setUserCount] = useState(0);
+    const [topVisitors, setTopVisitors] = useState([]);
 
     useEffect(() => {
         // Fetch property data (mock)
@@ -49,6 +50,27 @@ const AdminDashboard = () => {
                 { id: 4, user: 'John Doe', property: 'Villa', timeSpent: '4 hours' },
             ];
             setAnalyticsData(mockAnalytics);
+
+            // Calculate top visitors (by total time spent, mock logic)
+            const visitorMap = {};
+            mockAnalytics.forEach((entry) => {
+                // Convert timeSpent to minutes for sorting
+                const hoursMatch = entry.timeSpent.match(/([\d.]+)\s*hour/);
+                const minsMatch = entry.timeSpent.match(/([\d.]+)\s*min/);
+                let minutes = 0;
+                if (hoursMatch) minutes += parseFloat(hoursMatch[1]) * 60;
+                if (minsMatch) minutes += parseFloat(minsMatch[1]);
+                if (!visitorMap[entry.user]) visitorMap[entry.user] = 0;
+                visitorMap[entry.user] += minutes;
+            });
+            const sortedVisitors = Object.entries(visitorMap)
+                .sort((a, b) => b[1] - a[1])
+                .map(([user, totalMinutes], idx) => ({
+                    rank: idx + 1,
+                    user,
+                    totalMinutes,
+                }));
+            setTopVisitors(sortedVisitors);
         };
 
         fetchPropertyData();
@@ -133,6 +155,36 @@ const AdminDashboard = () => {
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </section>
+                {/* Top Visitors Section */}
+                <section className="admin-dashboard-section">
+                    <div className="analytics-table-container">
+                        <h2>Top Visitors</h2>
+                        <table className="analytics-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>User</th>
+                                    <th>Total Time Spent (minutes)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {topVisitors.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="3" style={{ textAlign: 'center' }}>No data</td>
+                                    </tr>
+                                ) : (
+                                    topVisitors.map((visitor) => (
+                                        <tr key={visitor.user}>
+                                            <td>{visitor.rank}</td>
+                                            <td>{visitor.user}</td>
+                                            <td>{visitor.totalMinutes}</td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </main>

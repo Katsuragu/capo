@@ -17,6 +17,7 @@ const Messaging = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedInboxId, setSelectedInboxId] = useState(null);
     const [isMessagingVisible, setIsMessagingVisible] = useState(false);
+    const [inboxTimestamps, setInboxTimestamps] = useState({});
 
     // Fetch user info
     useEffect(() => {
@@ -29,19 +30,32 @@ const Messaging = () => {
         return () => off(usersRef);
     }, []);
 
-    // Real-time load inbox IDs (user UIDs) from Firebase
+    // Real-time load inbox IDs (user UIDs) from Firebase and track latest message timestamp
     useEffect(() => {
         const messagesRef = ref(db, 'messages');
         const handleValue = (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 setInboxIds(Object.keys(data));
+                // Get latest timestamp for each inbox
+                const timestamps = {};
+                Object.entries(data).forEach(([uid, msgs]) => {
+                    const msgArr = Object.values(msgs);
+                    if (msgArr.length > 0) {
+                        const latest = Math.max(...msgArr.map(m => m.timestamp || 0));
+                        timestamps[uid] = latest;
+                    } else {
+                        timestamps[uid] = 0;
+                    }
+                });
+                setInboxTimestamps(timestamps);
             } else {
                 setInboxIds([]);
+                setInboxTimestamps({});
             }
         };
         onValue(messagesRef, handleValue);
-        return () => off(messagesRef);
+        return () => off(messagesRef, 'value', handleValue);
     }, []);
 
     // Real-time load messages for the selected inbox (user UID) from Firebase
@@ -83,12 +97,14 @@ const Messaging = () => {
         setSearchQuery(e.target.value);
     };
 
-    // Show email or name instead of UID
-    const filteredInboxIds = inboxIds.filter((uid) => {
-        const user = users[uid];
-        const displayName = user?.profile?.FullName || user?.email || uid;
-        return displayName.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+    // Show email or name instead of UID, and sort by latest message timestamp
+    const filteredInboxIds = inboxIds
+        .filter((uid) => {
+            const user = users[uid];
+            const displayName = user?.profile?.FullName || user?.email || uid;
+            return displayName.toLowerCase().includes(searchQuery.toLowerCase());
+        })
+        .sort((a, b) => (inboxTimestamps[b] || 0) - (inboxTimestamps[a] || 0)); // Sort by latest message
 
     const handleSelectInboxMessage = (inboxId) => {
         setSelectedInboxId(inboxId);
