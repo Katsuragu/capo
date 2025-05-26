@@ -23,86 +23,35 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// Static model names and their display names
+const MODEL_LIST = [
+    { key: 'lancriscorner', name: 'Lancris Corner' },
+    { key: 'lancrismiddle', name: 'Lancris Middle' },
+    { key: 'treelanecornerleft', name: 'Treelane Corner Left' },
+    { key: 'treelanecornerright', name: 'Treelane Corner Right' },
+    { key: 'treelanemiddle', name: 'Treelane Middle' },
+];
+
 const AdminDashboard = () => {
     const [propertyData, setPropertyData] = useState([]);
-    const [analyticsData, setAnalyticsData] = useState([]);
     const [userCount, setUserCount] = useState(0);
-    const [topVisitors, setTopVisitors] = useState([]);
 
+    // Fetch property data from Firebase (from 'models' node)
     useEffect(() => {
-        // Fetch property data (mock)
-        const fetchPropertyData = async () => {
-            const mockData = [
-                { id: 1, name: 'Home', views: 120 },
-                { id: 2, name: 'Hotel', views: 250 },
-                { id: 3, name: 'Apartment', views: 180 },
-                { id: 4, name: 'Villa', views: 300 },
-            ];
-            setPropertyData(mockData);
-        };
-
-        // Fetch analytics data (mock)
-        const fetchAnalyticsData = async () => {
-            const mockAnalytics = [
-                { id: 1, user: 'John Doe', property: 'Home', timeSpent: '2 hours' },
-                { id: 2, user: 'Jane Smith', property: 'Hotel', timeSpent: '1.5 hours' },
-                { id: 3, user: 'Alice Johnson', property: 'Apartment', timeSpent: '3 hours' },
-                { id: 4, user: 'John Doe', property: 'Villa', timeSpent: '4 hours' },
-            ];
-<<<<<<< HEAD
-            // Improved: Calculate total time spent per user per property (in hours)
-            const analyticsMap = {};
-            mockAnalytics.forEach((entry) => {
-                const key = `${entry.user}-${entry.property}`;
-                const hoursMatch = entry.timeSpent.match(/([\d.]+)\s*hour/);
-                const minsMatch = entry.timeSpent.match(/([\d.]+)\s*min/);
-                let hours = 0;
-                if (hoursMatch) hours += parseFloat(hoursMatch[1]);
-                if (minsMatch) hours += parseFloat(minsMatch[1]) / 60;
-                if (!analyticsMap[key]) {
-                    analyticsMap[key] = {
-                        user: entry.user,
-                        property: entry.property,
-                        totalHours: 0,
-                    };
-                }
-                analyticsMap[key].totalHours += hours;
-            });
-            const improvedAnalytics = Object.values(analyticsMap).map((item, idx) => ({
-                id: idx + 1,
-                user: item.user,
-                property: item.property,
-                totalHours: item.totalHours.toFixed(2),
+        const modelsRef = ref(db, 'models');
+        const handleValue = (snapshot) => {
+            const data = snapshot.val() || {};
+            // Map static model list to data from database
+            const propertyList = MODEL_LIST.map((model) => ({
+                id: model.key,
+                name: model.name,
+                views: data[model.key]?.views || 0,
+                heartCount: data[model.key]?.heartCount || 0,
             }));
-            setAnalyticsData(improvedAnalytics);
-=======
-            setAnalyticsData(mockAnalytics);
-
-            // Calculate top visitors (by total time spent, mock logic)
-            const visitorMap = {};
-            mockAnalytics.forEach((entry) => {
-                // Convert timeSpent to minutes for sorting
-                const hoursMatch = entry.timeSpent.match(/([\d.]+)\s*hour/);
-                const minsMatch = entry.timeSpent.match(/([\d.]+)\s*min/);
-                let minutes = 0;
-                if (hoursMatch) minutes += parseFloat(hoursMatch[1]) * 60;
-                if (minsMatch) minutes += parseFloat(minsMatch[1]);
-                if (!visitorMap[entry.user]) visitorMap[entry.user] = 0;
-                visitorMap[entry.user] += minutes;
-            });
-            const sortedVisitors = Object.entries(visitorMap)
-                .sort((a, b) => b[1] - a[1])
-                .map(([user, totalMinutes], idx) => ({
-                    rank: idx + 1,
-                    user,
-                    totalMinutes,
-                }));
-            setTopVisitors(sortedVisitors);
->>>>>>> e35a58de991421ac6e676d912aa69deec233e4ae
+            setPropertyData(propertyList);
         };
-
-        fetchPropertyData();
-        fetchAnalyticsData();
+        onValue(modelsRef, handleValue);
+        return () => off(modelsRef, 'value', handleValue);
     }, []);
 
     // Fetch user count from Firebase
@@ -116,6 +65,7 @@ const AdminDashboard = () => {
         return () => off(usersRef, 'value', handleValue);
     }, []);
 
+    // Chart data for property views
     const chartData = {
         labels: propertyData.map((property) => property.name),
         datasets: [
@@ -124,6 +74,13 @@ const AdminDashboard = () => {
                 data: propertyData.map((property) => property.views),
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            },
+            {
+                label: 'Hearts',
+                data: propertyData.map((property) => property.heartCount),
+                backgroundColor: 'rgba(255, 99, 132, 0.4)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1,
             },
         ],
@@ -137,7 +94,7 @@ const AdminDashboard = () => {
             },
             title: {
                 display: true,
-                text: 'Property Views Analytics',
+                text: 'Property Views & Hearts Analytics',
             },
         },
     };
@@ -163,62 +120,32 @@ const AdminDashboard = () => {
                             <Bar data={chartData} options={chartOptions} />
                         </div>
                         <div className="analytics-table-container">
-                            <h2>Time Spent Analytics</h2>
+                            <h2>Property Analytics</h2>
                             <table className="analytics-table">
                                 <thead>
                                     <tr>
-                                        <th>User</th>
-                                        <th>Property</th>
-                                        <th>Total Time Spent (hours)</th>
+                                        <th>Model Name</th>
+                                        <th>Views</th>
+                                        <th>Hearts</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {analyticsData.length === 0 ? (
+                                    {propertyData.length === 0 ? (
                                         <tr>
                                             <td colSpan="3" style={{ textAlign: 'center' }}>No data</td>
                                         </tr>
                                     ) : (
-                                        analyticsData.map((data) => (
-                                            <tr key={data.id}>
-                                                <td>{data.user}</td>
-                                                <td>{data.property}</td>
-                                                <td>{data.totalHours}</td>
+                                        propertyData.map((property) => (
+                                            <tr key={property.id}>
+                                                <td>{property.name}</td>
+                                                <td>{property.views}</td>
+                                                <td>{property.heartCount}</td>
                                             </tr>
                                         ))
                                     )}
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </section>
-                {/* Top Visitors Section */}
-                <section className="admin-dashboard-section">
-                    <div className="analytics-table-container">
-                        <h2>Top Visitors</h2>
-                        <table className="analytics-table">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>User</th>
-                                    <th>Total Time Spent (minutes)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {topVisitors.length === 0 ? (
-                                    <tr>
-                                        <td colSpan="3" style={{ textAlign: 'center' }}>No data</td>
-                                    </tr>
-                                ) : (
-                                    topVisitors.map((visitor) => (
-                                        <tr key={visitor.user}>
-                                            <td>{visitor.rank}</td>
-                                            <td>{visitor.user}</td>
-                                            <td>{visitor.totalMinutes}</td>
-                                        </tr>
-                                    ))
-                                )}
-                            </tbody>
-                        </table>
                     </div>
                 </section>
             </main>

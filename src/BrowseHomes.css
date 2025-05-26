@@ -59,7 +59,7 @@ body, html {
 
 .browse-homes-item {
   position: relative;
-  background-color: white;
+  background-color: ;
   border-radius: 8px;
   overflow: hidden;
   width: 300px; /* Increase width */
@@ -91,4 +91,17 @@ body, html {
   padding: 5px 10px;
   border-radius: 4px;
   text-align: left; /* Align text to the left */
+}
+.browse-homes-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000 !important; /* Make Available Properties black */
+}
+
+/* Add this for the welcome text if you have it in your component */
+.browse-homes-welcome {
+  color: #000 !important; /* Make Welcome to Walkin black */
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }

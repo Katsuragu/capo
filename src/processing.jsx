@@ -17,6 +17,8 @@ const Processing = () => {
         email: '',
         contactNumber: '',
         propertyModel: '',
+        blk: '',
+        lot: '',
         additionalMessage: '',
         callbackDate: '',
         callbackTime: '',
@@ -33,7 +35,9 @@ const Processing = () => {
             reservation.fullName &&
             reservation.email &&
             reservation.contactNumber &&
-            reservation.propertyModel
+            reservation.propertyModel &&
+            reservation.blk &&
+            reservation.lot
         ) {
             try {
                 // Push reservation to Firebase under 'reservations'
@@ -49,6 +53,8 @@ const Processing = () => {
                     email: '',
                     contactNumber: '',
                     propertyModel: '',
+                    blk: '',
+                    lot: '',
                     additionalMessage: '',
                     callbackDate: '',
                     callbackTime: '',
@@ -105,12 +111,39 @@ const Processing = () => {
                         </label>
                         <label>
                             Chosen Property Model:
-                            <input
-                                type="text"
+                            <select
                                 name="propertyModel"
                                 value={reservation.propertyModel}
                                 onChange={handleInputChange}
-                                placeholder="Enter property model"
+                                required
+                            >
+                                <option value="">Select property model</option>
+                                <option value="Townhouse">Townhouse</option>
+                                <option value="Standard">Standard</option>
+                            </select>
+                        </label>
+                    </div>
+                    {/* New section for BLK and LOT */}
+                    <div className="form-row">
+                        <label>
+                            Block (BLK):
+                            <input
+                                type="text"
+                                name="blk"
+                                value={reservation.blk}
+                                onChange={handleInputChange}
+                                placeholder="Enter block number"
+                                required
+                            />
+                        </label>
+                        <label>
+                            Lot:
+                            <input
+                                type="text"
+                                name="lot"
+                                value={reservation.lot}
+                                onChange={handleInputChange}
+                                placeholder="Enter lot number"
                                 required
                             />
                         </label>
@@ -144,11 +177,33 @@ const Processing = () => {
                             placeholder="Enter any additional message or questions"
                         ></textarea>
                     </label>
+                    <div style={{ textAlign: "center", margin: "1.5rem 0" }}>
+                        <a
+                            href="https://drive.google.com/drive/folders/1O1IqG-zkAedoLPZWt9embTM-UPrnb2ZS?usp=drive_link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="download-pdf-link"
+                            style={{
+                                display: "inline-block",
+                                padding: "0.75rem 2rem",
+                                background: "#16a34a",
+                                color: "#fff",
+                                borderRadius: "8px",
+                                textDecoration: "none",
+                                fontWeight: "bold",
+                                boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+                            }}
+                        >
+                            View Reservation Guide (Google Drive)
+                        </a>
+                    </div>
                     <button type="submit" className="submit-button">
                         Submit Reservation
                     </button>
+                    
                 </form>
             </main>
+            
         </div>
     );
 };

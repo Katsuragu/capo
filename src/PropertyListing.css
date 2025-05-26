@@ -213,3 +213,13 @@ body, html {
   font-size: 0.9rem;
   animation: fadeIn 1.5s ease-in-out; /* Add fade-in animation */
 }
+/* Add to PropertyListing.css */
+.reserve-button {
+  background-color: #388e3c;
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+.reserve-button:hover {
+  background-color: #256029;
+}

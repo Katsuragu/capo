@@ -10,14 +10,19 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="navbar-brand">Walk-IN</div>
+            <div className="navbar-brand" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img
+                    src="/src/images/rmansion.jpg" // Save the logo as rmansion_logo.png in /src/images/
+                    alt="RMansion Logo"
+                    style={{ height: "40px", width: "40px", borderRadius: "50%" }}
+                />
+                Walk-IN
+            </div>
             <ul className="navbar-nav">
                 <li className="nav-item"><a href="/dashboard">Home</a></li>
-                <li className="nav-item"><a href="/property-listing">Property</a></li>
-                <li className="nav-item"><a href="/processing">Processing</a></li>
                 <li className="nav-item"><a href="/downloads">Downloads</a></li>
                 <li className="nav-item"><a href="/inquiry">Inquiry</a></li>
-                <li className="nav-item"><a href="/user-messaging">Messages</a></li> {/* Added User Messaging Link */}
+                <li className="nav-item"><a href="/user-messaging">Messages</a></li>
             </ul>
             <div className="user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>

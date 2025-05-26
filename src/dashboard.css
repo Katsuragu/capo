@@ -56,7 +56,7 @@ body, html {
   font-size: 1rem;
   border: none;
   border-radius: 0 20px 20px 0;
-  background-color: #2E2E2C;
+  background-color: #0a726f;
   color: white;
   cursor: pointer;
   display: flex;
@@ -78,7 +78,7 @@ body, html {
 
 .dashboard-section,
 .dashboard-section2 {
-  background-color: #2E2E2C;
+  background-color: #0a726f;
   color: white;
   padding: 40px 10vw;
   box-sizing: border-box;
@@ -90,7 +90,7 @@ body, html {
 }
 
 .dashboard-footer {
-  background-color: #2E2E2C;
+  background-color: #0a726f;
   color: white;
   text-align: left;
   padding: 10px 10vw;
@@ -105,7 +105,7 @@ body, html {
 
 .footer-link:hover {
   text-decoration: underline;
-  color: #4CAF50;
+  color: #2E2E2C;
 }
 
 /* Responsive Design */
@@ -144,4 +144,350 @@ body, html {
     font-size: 0.95rem;
     padding: 10px 12px;
   }
+}
+.dashboard-container {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.dashboard-hero {
+  background: linear-gradient(120deg, #16a34a 60%, #fff 100%);
+  padding: 3rem 0 2rem 0;
+  text-align: center;
+  color: #fff;
+}
+
+.dashboard-hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-search {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.search-input {
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  border: none;
+  width: 260px;
+  font-size: 1rem;
+}
+
+.search-button {
+  background: #fff;
+  color: #2E2E2C;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-button:hover {
+  background: #e6e6e6;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.dashboard-pricelist-section {
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-pricelist-section h2 {
+  color: #2E2E2C;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.dashboard-pricelist-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.dashboard-pricelist-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+  text-align: left;
+  transition: transform 0.2s;
+}
+
+.dashboard-pricelist-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(22,163,74,0.13);
+}
+
+.dashboard-pricelist-card h3 {
+  color: #2E2E2C;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.dashboard-price {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+}
+
+.dashboard-pricelist-card ul {
+  padding-left: 18px;
+  color: #444;
+  font-size: 0.98rem;
+}
+
+.dashboard-reserve-section {
+  background: #2E2E2C;
+  color: #fff;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  margin: 2rem auto 2.5rem auto;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(22,163,74,0.07);
+}
+
+.dashboard-reserve-section h2 {
+  margin-bottom: 0.7rem;
+}
+
+.dashboard-reserve-section p {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-reserve-btn {
+  background: #fff;
+  color: #2E2E2C;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 2.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+.dashboard-reserve-btn:hover {
+  background: #e6e6e6;
+  color: #2E2E2C;
+}
+
+.dashboard-section2 {
+  background: #f1f5f9;
+  color: #222;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.dashboard-section2 h2 {
+  color: #2E2E2C;
+  margin-bottom: 0.7rem;
+}
+/* Use the About section color (#16a34a) for all sections */
+
+.dashboard-hero,
+.dashboard-pricelist-section,
+.dashboard-reserve-section,
+.dashboard-section2 {
+  background: #2E2E2C !important;
+  color: #fff !important;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.dashboard-hero-content h1,
+.dashboard-hero-content p,
+.dashboard-pricelist-section h2,
+.dashboard-pricelist-card h3,
+.dashboard-price,
+.dashboard-reserve-section h2,
+.dashboard-reserve-section p,
+.dashboard-section2 h2,
+.dashboard-section2 p {
+  color: #fff !important;
+}
+
+.dashboard-pricelist-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1.5rem 2rem;
+  min-width: 260px;
+  max-width: 320px;
+  flex: 1 1 260px;
+  text-align: left;
+  color: #fff;
+}
+
+.dashboard-pricelist-card ul {
+  color: #fff;
+}
+
+.dashboard-reserve-btn {
+  background: #fff;
+  color: #16a34a;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 2.2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-top: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dashboard-reserve-btn:hover {
+  background: #e6e6e6;
+  color: #2E2E2C;
+}
+
+.dashboard-main {
+  background: transparent;
+}
+/* Add this or update your .dashboard-hero section */
+
+.dashboard-hero {
+  position: relative;
+  background: linear-gradient(120deg, rgba(22,163,74,0.85) 70%, rgba(30,140,58,0.85) 100%);
+  color: #fff;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 2.5rem;
+  padding: 3.5rem 1rem 3.5rem 1rem;
+  box-shadow: 0 8px 32px rgba(22,163,74,0.09);
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('./screenshot.jpg') center center/cover no-repeat;
+  opacity: 0.45;
+  z-index: 1;
+}
+
+.dashboard-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dashboard-hero-content h1,
+.dashboard-hero-content p {
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+/* Make screenshot.jpg the whole page background */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('./screenshot.jpg') center center/cover no-repeat fixed;
+  height: 100%;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+
+.dashboard-container,
+.dashboard-header,
+.dashboard-main,
+.dashboard-section,
+.dashboard-section2,
+.dashboard-footer {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+.dashboard-hero,
+.dashboard-pricelist-section,
+.dashboard-reserve-section,
+.dashboard-section2 {
+  background: transparent !important;
+  color: #fff !important;
+  box-shadow: none;
+}
+
+.dashboard-pricelist-card {
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+
+.dashboard-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(34, 34, 34, 0.65);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dashboard-container,
+.dashboard-main,
+.dashboard-section,
+.dashboard-section2,
+.dashboard-footer {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+.dashboard-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 34, 34, 0.65);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.dashboard-main {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.dashboard-main > * {
+  position: relative;
+  z-index: 1;
 }

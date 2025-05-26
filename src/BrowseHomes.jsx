@@ -1,26 +1,30 @@
 import React from "react";
-import './BrowseHomes.css'; // Import the CSS file
+import { useNavigate } from "react-router-dom";
+import './BrowseHomes.css';
 
 const BrowseHomes = () => {
+  const navigate = useNavigate();
+
   const homeCategories = [
-    { name: "Lancrest", img: "/src/images/hotels.jpg" },
+    { name: "Lancris", img: "/src/images/hotels.jpg" },
     { name: "Treelane", img: "/src/images/images.jpg" },
   ];
 
   const handleImageClick = (categoryName) => {
-    console.log(`Clicked on ${categoryName}`);
-    // Implement your navigation or action here
+    // Pass the category as a query parameter
+    navigate(`/property-listing?category=${encodeURIComponent(categoryName)}`);
   };
 
   return (
     <div className="browse-homes-container">
-      <h2 className="browse-homes-title">Villages</h2>
+      <h2 className="browse-homes-title">Available Properties</h2>
       <div className="browse-homes-row">
         {homeCategories.map((category, index) => (
           <div
             key={index}
             className="browse-homes-item"
             onClick={() => handleImageClick(category.name)}
+            style={{ cursor: 'pointer' }}
           >
             <img src={category.img} alt={category.name} className="browse-homes-image" />
             <div className="browse-homes-label">

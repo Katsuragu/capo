@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
 import './cssadmin/Messaging.css';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, onValue, off, push, set } from 'firebase/database';
+import { getDatabase, ref, onValue, off, push, set, update } from 'firebase/database';
 import firebaseConfig from '../firebaseConfig';
 
 // Initialize Firebase
@@ -18,6 +18,7 @@ const Messaging = () => {
     const [selectedInboxId, setSelectedInboxId] = useState(null);
     const [isMessagingVisible, setIsMessagingVisible] = useState(false);
     const [inboxTimestamps, setInboxTimestamps] = useState({});
+    const [unreadCounts, setUnreadCounts] = useState({});
 
     // Fetch user info
     useEffect(() => {
@@ -30,28 +31,34 @@ const Messaging = () => {
         return () => off(usersRef);
     }, []);
 
-    // Real-time load inbox IDs (user UIDs) from Firebase and track latest message timestamp
+    // Real-time load inbox IDs (user UIDs) from Firebase and track latest message timestamp and unread count
     useEffect(() => {
         const messagesRef = ref(db, 'messages');
         const handleValue = (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 setInboxIds(Object.keys(data));
-                // Get latest timestamp for each inbox
+                // Get latest timestamp for each inbox and unread count
                 const timestamps = {};
+                const unread = {};
                 Object.entries(data).forEach(([uid, msgs]) => {
                     const msgArr = Object.values(msgs);
                     if (msgArr.length > 0) {
                         const latest = Math.max(...msgArr.map(m => m.timestamp || 0));
                         timestamps[uid] = latest;
+                        // Count unread user messages
+                        unread[uid] = msgArr.filter(m => m.from === 'user' && !m.readByAdmin).length;
                     } else {
                         timestamps[uid] = 0;
+                        unread[uid] = 0;
                     }
                 });
                 setInboxTimestamps(timestamps);
+                setUnreadCounts(unread);
             } else {
                 setInboxIds([]);
                 setInboxTimestamps({});
+                setUnreadCounts({});
             }
         };
         onValue(messagesRef, handleValue);
@@ -72,6 +79,14 @@ const Messaging = () => {
                     .map(([id, value]) => ({ id, ...value }))
                     .sort((a, b) => a.timestamp - b.timestamp);
                 setMessages(msgArray);
+
+                // Mark all user messages as read when viewing
+                msgArray.forEach((msg) => {
+                    if (msg.from === 'user' && !msg.readByAdmin) {
+                        const msgRef = ref(db, `messages/${selectedInboxId}/${msg.id}`);
+                        update(msgRef, { readByAdmin: true });
+                    }
+                });
             } else {
                 setMessages([]);
             }
@@ -135,9 +150,32 @@ const Messaging = () => {
                                 const user = users[uid];
                                 const displayName = user?.profile?.FullName || user?.email || uid;
                                 return (
-                                    <li key={uid} onClick={() => handleSelectInboxMessage(uid)}>
+                                    <li key={uid} onClick={() => handleSelectInboxMessage(uid)} style={{ position: "relative" }}>
                                         <div className="message-sender">{displayName}</div>
                                         <div className="message-subject">User Inbox</div>
+                                        {unreadCounts[uid] > 0 && (
+                                            <span
+                                                style={{
+                                                    position: "absolute",
+                                                    right: 10,
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)",
+                                                    background: "red",
+                                                    color: "#fff",
+                                                    borderRadius: "50%",
+                                                    width: 18,
+                                                    height: 18,
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    fontSize: 12,
+                                                    fontWeight: "bold"
+                                                }}
+                                                title={`${unreadCounts[uid]} unread message(s)`}
+                                            >
+                                                {unreadCounts[uid]}
+                                            </span>
+                                        )}
                                     </li>
                                 );
                             })}
