@@ -491,3 +491,20 @@ body, html {
   position: relative;
   z-index: 1;
 }
+
+.dashboard-header {
+  position: relative;
+  background: rgba(34, 34, 34, 0.85) !important; /* semi-transparent dark */
+  color: #fff !important;
+  padding: 50px 10vw 30px 10vw;
+  text-align: center;
+  animation: slideDown 1s ease-in-out;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  z-index: 10;
+}
+
+.dashboard-header * {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
