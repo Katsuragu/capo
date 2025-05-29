@@ -1,95 +1,195 @@
 .profile-container {
     max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    font-family: Arial, sans-serif;
+    margin: 48px auto;
+    padding: 32px 24px;
+    background: linear-gradient(120deg, #e0eafc 0%, #f4f6fb 100%);
+    box-shadow: 0 8px 32px rgba(37,99,235,0.07), 0 1.5px 8px rgba(22,163,74,0.04);
+    border-radius: 22px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
 h1 {
     text-align: center;
-    color: #145A4C;
-    margin-bottom: 20px;
+    color: #020202;
+    margin-bottom: 28px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    background: linear-gradient(90deg, #000000 70%, #16a34a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .profile-picture-section {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
+    position: relative;
 }
 
 .profile-picture {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 24px rgba(37,99,235,0.13);
     margin-bottom: 10px;
+    border: 4px solid #fff;
+    background: #e0eafc;
+    transition: box-shadow 0.2s, border 0.2s;
+}
+
+.profile-picture:hover {
+    box-shadow: 0 8px 32px rgba(22,163,74,0.13);
+    border: 4px solid #16a34a;
 }
 
 .profile-picture-section input[type="file"] {
     margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-info {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+    padding: 24px 18px;
+    margin-bottom: 18px;
 }
 
 .profile-info label {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 1rem;
-    color: #333;
+    align-items: center;
+    gap: 8px; /* Add spacing between name and span */
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+    color: #000000;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .profile-info span {
     font-weight: bold;
-    color: #555;
+    color: #797d7a;
+    margin-left: 6px; /* Ensure it's beside the name */
+    display: inline-block;
 }
 
 .profile-info input {
-    padding: 8px;
+    padding: 8px 12px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 6px;
     width: 60%;
+    background: #f9fafb;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.profile-info input:focus {
+    border: 1.5px solid #2563eb;
+    box-shadow: 0 0 8px rgba(37,99,235,0.10);
+    outline: none;
 }
 
 .profile-actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 10px 28px;
     font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     margin: 0 10px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(22,163,74,0.07);
+    transition: background 0.2s, transform 0.2s;
 }
 
 .edit-button {
-    background-color: #145A4C;
+    background: linear-gradient(90deg, #16a34a 60%);
     color: white;
 }
 
 .edit-button:hover {
-    background-color: #0a3a2f;
+    background: linear-gradient(90deg, #16a34a 100%);
+    transform: scale(1.05);
 }
 
 .save-button {
-    background-color: #28a745;
+    background: linear-gradient(90deg, #16a34a 60%);
     color: white;
 }
 
 .save-button:hover {
-    background-color: #218838;
+    background: linear-gradient(90deg, #16a34a 100%);
+    transform: scale(1.05);
 }
 
 .cancel-button {
-    background-color: #dc3545;
+    background: linear-gradient(90deg, #dc3545 60%);
     color: white;
 }
 
 .cancel-button:hover {
-    background-color: #c82333;
+    background: linear-gradient(90deg, #dc3545 100%);
+    transform: scale(1.05);
+}
+
+/* Decorative floating shapes */
+.profile-container::before {
+    content: "";
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+    opacity: 0.12;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float1 8s ease-in-out infinite alternate;
+}
+.profile-container::after {
+    content: "";
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, #16a34a 0%, transparent 70%);
+    opacity: 0.10;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float2 7s ease-in-out infinite alternate;
+}
+@keyframes float1 {
+    from { transform: translateY(0) scale(1);}
+    to { transform: translateY(30px) scale(1.08);}
+}
+@keyframes float2 {
+    from { transform: translateY(0) scale(1);}
+    to { transform: translateY(-20px) scale(1.04);}
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+    .profile-container {
+        padding: 16px 4vw;
+        border-radius: 12px;
+    }
+    .profile-info {
+        padding: 14px 4vw;
+    }
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+    button {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
 }

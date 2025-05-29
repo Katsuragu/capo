@@ -75,9 +75,7 @@ const UserMessaging = () => {
     return (
         <div className="messaging-container">
             <Navbar />
-            <header className="messaging-header">
-                <h1>User Messaging</h1>
-                <p>View your messages and communicate with the admin.</p>
+            <header className="">
             </header>
             <main className="messaging-main">
                 {/* Inbox Section */}
