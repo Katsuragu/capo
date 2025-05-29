@@ -23,7 +23,6 @@ const UserManagement = () => {
         const unsubscribe = onValue(usersRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                // Map users to a flat array for the table
                 const userList = Object.entries(data).map(([uid, value]) => {
                     let name = value.profile?.FullName || '';
                     let email = value.email || value.profile?.Email || '';
@@ -49,7 +48,6 @@ const UserManagement = () => {
         setIsModalOpen(true);
     };
 
-    // Delete user from Firebase
     const handleDeleteUser = async (userId) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
             await remove(ref(db, `users/${userId}`));
@@ -62,7 +60,6 @@ const UserManagement = () => {
         setIsModalOpen(false);
     };
 
-    // Save changes to Firebase
     const handleSaveChanges = async () => {
         if (!selectedUser) return;
         const updates = {
@@ -87,77 +84,76 @@ const UserManagement = () => {
 
     return (
         <div className="user-management-container">
-            <AdminNavbar />
-            <header className="user-management-header">
-                <h1>User Management</h1>
-                <p>Manage users and their roles.</p>
-            </header>
-            <main className="user-management-main">
-                <div className="search-bar">
-                    <input
-                        type="text"
-                        placeholder="Search users..."
-                        value={searchQuery}
-                        onChange={handleSearch}
-                    />
-                </div>
-                <table className="user-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredUsers.length === 0 ? (
+            <div className="fixed-navbar">
+                <AdminNavbar />
+            </div>
+            <div className="content-below-navbar">
+                <header className="user-management-header">
+                    <h1>User Management</h1>
+                    <p>Manage users and their roles.</p>
+                </header>
+                <main className="user-management-main">
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search users..."
+                            value={searchQuery}
+                            onChange={handleSearch}
+                        />
+                    </div>
+                    <table className="user-table">
+                        <thead>
                             <tr>
-                                <td colSpan="4" style={{ textAlign: 'center' }}>No users found.</td>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
                             </tr>
-                        ) : (
-                            filteredUsers.map((user) => (
-                                <tr key={user.id}>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.role}</td>
-                                    <td>
-                                        <button
-                                            className="edit-button"
-                                            onClick={() => handleEditUser(user)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className="delete-button"
-                                            onClick={() => handleDeleteUser(user.id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                        </thead>
+                        <tbody>
+                            {filteredUsers.length === 0 ? (
+                                <tr>
+                                    <td colSpan="4" style={{ textAlign: 'center' }}>No users found.</td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </main>
+                            ) : (
+                                filteredUsers.map((user) => (
+                                    <tr key={user.id}>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.role}</td>
+                                        <td>
+                                            <button
+                                                className="edit-button"
+                                                onClick={() => handleEditUser(user)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="delete-button"
+                                                onClick={() => handleDeleteUser(user.id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </main>
+            </div>
 
-            {/* Modal */}
             {isModalOpen && selectedUser && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <button className="close-button" onClick={handleModalClose}>
-                            &times;
-                        </button>
+                        <button className="close-button" onClick={handleModalClose}>&times;</button>
                         <h2>Edit User</h2>
                         <label>
                             Name:
                             <input
                                 type="text"
                                 value={selectedUser.name}
-                                onChange={(e) =>
-                                    setSelectedUser({ ...selectedUser, name: e.target.value })
-                                }
+                                onChange={(e) => setSelectedUser({ ...selectedUser, name: e.target.value })}
                             />
                         </label>
                         <label>
@@ -165,29 +161,21 @@ const UserManagement = () => {
                             <input
                                 type="email"
                                 value={selectedUser.email}
-                                onChange={(e) =>
-                                    setSelectedUser({ ...selectedUser, email: e.target.value })
-                                }
+                                onChange={(e) => setSelectedUser({ ...selectedUser, email: e.target.value })}
                             />
                         </label>
                         <label>
                             Role:
                             <select
                                 value={selectedUser.role}
-                                onChange={(e) =>
-                                    setSelectedUser({ ...selectedUser, role: e.target.value })
-                                }
+                                onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
                             >
                                 <option value="Admin">Admin</option>
                                 <option value="User">User</option>
                             </select>
                         </label>
-                        <button className="save-button" onClick={handleSaveChanges}>
-                            Save Changes
-                        </button>
-                        <button className="cancel-button" onClick={handleModalClose}>
-                            Cancel
-                        </button>
+                        <button className="save-button" onClick={handleSaveChanges}>Save Changes</button>
+                        <button className="cancel-button" onClick={handleModalClose}>Cancel</button>
                     </div>
                 </div>
             )}

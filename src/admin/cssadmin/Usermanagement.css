@@ -1,9 +1,25 @@
+
+/* Dashboard Styles (Copied from Dashboard.css) */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    height: 100%;
+    overflow: hidden;
+    background-image: url('src/images/screenshot.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
 /* General Container */
 .user-management-container {
     font-family: Arial, sans-serif;
     padding: 20px;
     background-color: #fff;
     min-height: 100vh;
+    overflow-y: auto;
 }
 
 /* Header */
@@ -11,10 +27,10 @@
     text-align: center;
     margin-bottom: 20px;
     background-color: #2E2E2C;
-    color: #232322;
+    color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .user-management-header h1 {
@@ -34,6 +50,7 @@
 
 .search-bar input {
     width: 50%;
+    max-width: 400px;
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -46,18 +63,18 @@
 .user-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
 
 .user-table th,
 .user-table td {
-    padding: 10px;
+    padding: 12px 10px;
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .user-table th {
@@ -74,11 +91,11 @@
     background-color: #eaeaea;
 }
 
-/* Buttons */
+/* Action Buttons */
 .edit-button,
 .delete-button {
-    padding: 5px 10px;
-    margin: 0 5px;
+    padding: 6px 12px;
+    margin: 0 4px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -88,7 +105,6 @@
 .edit-button {
     background-color: #4CAF50;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .edit-button:hover {
@@ -98,14 +114,13 @@
 .delete-button {
     background-color: #f44336;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
     background-color: #d32f2f;
 }
 
-/* Modal Overlay */
+/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -119,21 +134,20 @@
     z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     color: #232322;
 }
 
 .modal-content h2 {
     font-size: 1.5rem;
-    color: #232322;
     margin-bottom: 20px;
 }
 
@@ -166,28 +180,25 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: #888;
-    transition: color 0.3s ease;
 }
 
 .close-button:hover {
     color: #f44336;
 }
 
-/* Save and Cancel Buttons */
 .save-button,
 .cancel-button {
     padding: 10px 20px;
     margin: 5px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .save-button {
     background-color: #28a745;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .save-button:hover {
@@ -197,191 +208,39 @@
 .cancel-button {
     background-color: #dc3545;
     color: white;
-    transition: background-color 0.3s ease;
 }
 
 .cancel-button:hover {
     background-color: #c82333;
 }
 
-/* Chart and Analytics Section */
-.chart-and-analytics {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+/* Scrollbar Styling */
+.user-table tbody::-webkit-scrollbar {
+    width: 8px;
 }
 
-.chart-container {
-    flex: 2;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-    color: #232322;
+.user-table tbody::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
 }
 
-.analytics-table-container {
-    flex: 1;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-    color: #232322;
-}
-
-.analytics-table-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #232322;
-}
-
-.analytics-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.analytics-table th,
-.analytics-table td {
-    padding: 10px;
-    text-align: left;
-}
-
-.analytics-table th {
-    background-color: #f5f5f5;
-    color: #232322;
-    font-weight: bold;
-}
-
-.analytics-table tr:hover {
-    background-color: #eaeaea;
-}
-
-/* Dashboard Styles (Copied from Dashboard.css) */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-    height: 100%;
-    overflow: hidden;
-    background-image: url('src/images/screenshot.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.dashboard-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y: auto;
-}
-
-.dashboard-header {
-    background-color: transparent;
-    color: #232322;
-    padding: 50px;
-    text-align: center;
-}
-
-.dashboard-search {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.dashboard-search-input {
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 20px 0 0 20px;
-    margin-right: -1px;
-    width: 300px;
-}
-
-.dashboard-search-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0 20px 20px 0;
-    background-color: #2E2E2C;
-    color: #232322;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dashboard-main {
-    flex: 1;
-}
-
-.dashboard-section {
-    height: 100%;
-    background-color: rgba(245, 245, 245, 0.5);
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.dashboard-section2 {
-    background-color: #2E2E2C;
-    padding: 85px;
-    color: #232322;
-}
-
-.dashboard-footer {
-    background-color: #2E2E2C;
-    color: #232322;
-    text-align: left;
-    padding: 10px;
-    gap: 1.5rem;
-}
-
-.footer-link {
-    color: #232322;
-    text-decoration: none;
-    margin: 0 1rem;
-}
-
-.footer-link:hover {
-    text-decoration: underline;
+.user-table tbody::-webkit-scrollbar-track {
+    background: #f5f5f5;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .user-table th,
     .user-table td {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         padding: 8px;
-    }
-
-    .modal-content {
-        width: 90%;
     }
 
     .search-bar input {
         width: 90%;
     }
-}
 
-/* Scrollbar styling for light mode */
-.user-table tbody::-webkit-scrollbar {
-    width: 8px;
-}
-.user-table tbody::-webkit-scrollbar-thumb {
-    background: #eaeaea;
-    border-radius: 4px;
-}
-.user-table tbody::-webkit-scrollbar-track {
-    background: #f5f5f5;
-}
-.user-management-container {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #fff;
-    min-height: 100vh;
-    height: 100vh;
-    overflow-y: auto; /* Make the whole page scrollable */
+    .modal-content {
+        width: 95%;
+    }
 }

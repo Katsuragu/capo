@@ -13,7 +13,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const initialState = {
-  principalLastName: '',
+ principalLastName: '',
   principalFirstName: '',
   principalMiddleName: '',
   presentAddress: '',
@@ -28,54 +28,114 @@ const initialState = {
   facebook: '',
   tin: '',
   pagibig: '',
+  MailingAdd: '', // Added from form fields
+  EmployersName: '', // Added from form fields
+  NatureOfBusiness: '', // Added from form fields
+  PositionInDepartment: '', // Added from form fields
+  EmployersAdd: '', // Added from form fields
+  Age: '', // Added from form fields
+
   spouseLastName: '',
   spouseFirstName: '',
   spouseMiddleName: '',
-  spouseBirthPlace: '',
-  spouseBirthday: '',
-  spouseCitizenship: '',
-  spouseReligion: '',
-  spouseEmployer: '',
-  spouseBusiness: '',
-  spousePosition: '',
-  spouseEmployerAddress: '',
-  spouseOfficeTel: '',
-  spouseContactPerson: '',
-  spouseEmail: '',
-  sourceOfIncome: '',
-  employmentType: '',
-  yearsInService: '',
-  monthlyIncome: '',
-  projectName: '',
-  propertyDesc: '',
-  lotArea: '',
-  houseArea: '',
-  contractPrice: '',
-  downPayment: '',
-  dpTerm: '',
-  loanAmount: '',
-  monthlyAmort: '',
-  financingScheme: '',
+  spplaceOfBirth: '', // Corrected from 'spouseBirthPlace' to match form
+  spbirthday: '', // Corrected from 'spouseBirthday' to match form
+  spgender: '', // Corrected from 'spouseGender' to match form
+  spcivilStatus: '', // Corrected from 'spouseCivilStatus' to match form
+  spcitizenship: '', // Corrected from 'spouseCitizenship' to match form
+  spreligion: '', // Corrected from 'spouseReligion' to match form
+  spcontact: '', // Corrected from 'spouseContact' to match form
+  spfacebook: '', // Corrected from 'spouseFacebook' to match form
+  sppresentAddress: '', // Corrected from 'spousePresentAddress' to match form
+  sppermanentAddress: '', // Corrected from 'spousePermanentAddress' to match form
+  spMailingAdd: '', // Added from form fields
+  spEmployersName: '', // Added from form fields
+  spNatureOfBusiness: '', // Added from form fields
+  spositionInDepartment: '', // Corrected from 'spousePositionInDepartment' to match form
+  spEmployersAdd: '', // Corrected from 'spouseEmployersAdd' to match form
+  sptin: '', // Corrected from 'spouseTin' to match form
+  sppagibig: '', // Corrected from 'spousePagibig' to match form
+  spsourceOfIncome: '', // Corrected from 'spouseSourceOfIncome' to match form
+  spAge: '', // Added from form fields
+
+  AttorneyLastName: '', // Added from form fields
+  AttorneyFirstName: '', // Added from form fields
+  AttorneyMiddleName: '', // Added from form fields
+  Attorneygender: '', // Added from form fields
+  AttorneypresentAddress: '', // Added from form fields
+  Attorneycontact: '', // Added from form fields
+
   coLastName: '',
   coFirstName: '',
   coMiddleName: '',
   coBirthday: '',
   coGender: '',
-  coBirthPlace: '',
-  coCitizenship: '',
+  coPlaceOfBirth: '', // Added from form fields
+  coAge: '', // Added from form fields
   coCivilStatus: '',
+  coCitizenship: '',
   coReligion: '',
-  coAddress: '',
+  coAddress: '', // Note: This was 'coPresentAddress' and 'coPermanentAddress' in form, consolidated for clarity
   coContact: '',
-  coEmail: '',
+  coEmail: '', // Not in form fields, but in initialState
   coSourceOfIncome: '',
+  coFacebook: '', // Added from form fields
+  coPresentAddress: '', // Added from form fields
+  coPermanentAddress: '', // Added from form fields
+  coMailingAdd: '', // Added from form fields
+  coEmployersName: '', // Added from form fields
+  coNatureOfBusiness: '', // Added from form fields
+  coPositionInDepartment: '', // Added from form fields
+  coEmployersAdd: '', // Added from form fields
+  coTin: '', // Added from form fields
+  coPagibig: '', // Added from form fields
+
+  coSpouseLastName: '', // Added from form fields
+  coSpouseFirstName: '', // Added from form fields
+  coSpouseMiddleName: '', // Added from form fields
+  coSpousePlaceOfBirth: '', // Added from form fields
+  coSpouseAge: '', // Added from form fields
+  coSpouseBirthday: '', // Added from form fields
+  coSpouseGender: '', // Added from form fields
+  coSpouseCivilStatus: '', // Added from form fields
+  coSpouseCitizenship: '', // Added from form fields
+  coSpouseReligion: '', // Added from form fields
+  coSpouseContact: '', // Added from form fields
+  coSpouseFacebook: '', // Added from form fields
+  coSpousePresentAddress: '', // Added from form fields
+  coSpousePermanentAddress: '', // Added from form fields
+  coSpouseMailingAdd: '', // Added from form fields
+  coSpouseEmployersName: '', // Added from form fields
+  coSpouseNatureOfBusiness: '', // Added from form fields
+  coSpousePositionInDepartment: '', // Added from form fields
+  coSpouseEmployersAdd: '', // Added from form fields
+  coSpouseTin: '', // Added from form fields
+  coSpousePagibig: '', // Added from form fields
+  coSpouseSourceOfIncome: '', // Added from form fields
+
+
   refName: '',
   refAddress: '',
   refContact: '',
-  sigPrincipalImg: '',
-  sigSpouseImg: '',
-  sigCoImg: ''
-};
+ CorefName: '',
+CorefAddress: '',
+  CorefContact: '',
+
+  subdivision: '', // Added from Marketing Department section
+  houseDescription: '', // Added from Marketing Department section
+  lotArea: '', // Added from Marketing Department section
+  houseArea: '', // Added from Marketing Department section
+  totalContractPrice: '', // Added from Marketing Department section
+  downPayment: '', // Added from Marketing Department section
+  dpTerm: '', // Added from Marketing Department section
+  loanAmount: '', // Added from Marketing Department section
+  maTerm: '', // Added from Marketing Department section
+  monthlyAmortization: '', // Added from Marketing Department section
+
+  sigPrincipalImg: '', // Base64 string or URL
+  sigSpouseImg: '',    // Base64 string or URL
+  sigCoImg: ''         // Base64 string or URL
+  };
 
 const BuyersInformationForm = () => {
   const [form, setForm] = useState(initialState);
@@ -120,7 +180,7 @@ const BuyersInformationForm = () => {
       return;
     }
     try {
-      await push(ref(db, 'reservations'), form);
+      await push(ref(db, 'principalBuyers'), form);
       alert('Reservation submitted!');
       setForm(initialState);
     } catch (err) {
@@ -156,9 +216,8 @@ const BuyersInformationForm = () => {
             <input name="principalLastName" value={form.principalLastName} onChange={handleChange} type="text" placeholder="Last Name" required />
             <input name="principalFirstName" value={form.principalFirstName} onChange={handleChange} type="text" placeholder="First Name" required />
             <input name="principalMiddleName" value={form.principalMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
-            <textarea name="presentAddress" value={form.presentAddress} onChange={handleChange} placeholder="Present Address" />
-            <textarea name="permanentAddress" value={form.permanentAddress} onChange={handleChange} placeholder="Permanent Address" />
             <input name="placeOfBirth" value={form.placeOfBirth} onChange={handleChange} type="text" placeholder="Place of Birth" />
+            <input name="Age" value={form.Age} onChange={handleChange} type="text" placeholder="Age" />
             <input name="birthday" value={form.birthday} onChange={handleChange} type="date" max={getMaxBirthdayDate()} placeholder="Birthday" />
             <select name="gender" value={form.gender} onChange={handleChange}>
               <option value="">Gender</option>
@@ -178,82 +237,243 @@ const BuyersInformationForm = () => {
             <input name="religion" value={form.religion} onChange={handleChange} type="text" placeholder="Religion" />
             <input name="contact" value={form.contact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" required />
             <input name="facebook" value={form.facebook} onChange={handleChange} type="text" placeholder="Facebook/Messenger Account" />
+            <textarea name="presentAddress" value={form.presentAddress} onChange={handleChange} placeholder="Present Address" />
+            <textarea name="permanentAddress" value={form.permanentAddress} onChange={handleChange} placeholder="Permanent Address" />
+             <select name="MailingAdd" value={form.MailingAdd} onChange={handleChange}>
+              <option value="">PREFERRED MAILING ADD.:</option>
+              <option value="presentaddress">Present Address</option>
+              <option value="permanentaddress">Permanent Address</option>
+              <option value="employersaddress">Employers Address</option>
+            </select>
+            <input name="EmployersName" value={form.EmployersName} onChange={handleChange} type="text" placeholder="EMPLOYER/BUSINESS NAME:" required />
+            <input name="NatureOfBusiness" value={form.NatureOfBusiness} onChange={handleChange} type="text" placeholder="NATURE OF BUSINESS:" required />
+           <input name="PositionInDepartment" value={form.PositionInDepartment} onChange={handleChange} type="text" placeholder="POSITION & DEPARTMENT:" required />
+          <textarea name="EmployersAdd" value={form.Empolyers} onChange={handleChange} placeholder="EMPLOYER/BUSINESS ADDRESS:" />
             <input name="tin" value={form.tin} onChange={handleChange} type="text" placeholder="TIN ID No." />
             <input name="pagibig" value={form.pagibig} onChange={handleChange} type="text" placeholder="PAG-IBIG MID No." />
+             <select name="sourceOfIncome" value={form.sourceOfIncome} onChange={handleChange}>
+              <option value="">SOURCE OF INCOME:</option>
+              <option value="Investment">Investment</option>
+              <option value="Remittance">Remittance</option>
+              <option value="Pension">Pension</option>
+              <option value="Employment">Employment</option>
+              <option value="Other">Other</option>
+            </select>
+           
           </fieldset>
 
           {/* Spouse Information */}
           <fieldset>
             <legend>Spouse Information</legend>
-            <input name="spouseLastName" value={form.spouseLastName} onChange={handleChange} type="text" placeholder="Last Name" />
-            <input name="spouseFirstName" value={form.spouseFirstName} onChange={handleChange} type="text" placeholder="First Name" />
-            <input name="spouseMiddleName" value={form.spouseMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
-            <input name="spouseBirthPlace" value={form.spouseBirthPlace} onChange={handleChange} type="text" placeholder="Place of Birth" />
-            <input name="spouseBirthday" value={form.spouseBirthday} onChange={handleChange} type="date" placeholder="Birthday" />
-            <input name="spouseCitizenship" value={form.spouseCitizenship} onChange={handleChange} type="text" placeholder="Citizenship" />
-            <input name="spouseReligion" value={form.spouseReligion} onChange={handleChange} type="text" placeholder="Religion" />
-            <input name="spouseEmployer" value={form.spouseEmployer} onChange={handleChange} type="text" placeholder="Employer/Business Name" />
-            <input name="spouseBusiness" value={form.spouseBusiness} onChange={handleChange} type="text" placeholder="Nature of Business" />
-            <input name="spousePosition" value={form.spousePosition} onChange={handleChange} type="text" placeholder="Position & Department" />
-            <textarea name="spouseEmployerAddress" value={form.spouseEmployerAddress} onChange={handleChange} placeholder="Employer/Business Address" />
-            <input name="spouseOfficeTel" value={form.spouseOfficeTel} onChange={handleChange} type="tel" pattern="[0-9]{7,13}" placeholder="Office Telephone No." />
-            <input name="spouseContactPerson" value={form.spouseContactPerson} onChange={handleChange} type="text" placeholder="Contact Person" />
-            <input name="spouseEmail" value={form.spouseEmail} onChange={handleChange} type="email" placeholder="Email Address" />
-          </fieldset>
-
-          {/* Employment & Financial */}
-          <fieldset>
-            <legend>Employment & Financial</legend>
-            <input name="sourceOfIncome" value={form.sourceOfIncome} onChange={handleChange} type="text" placeholder="Source of Income" />
-            <input name="employmentType" value={form.employmentType} onChange={handleChange} type="text" placeholder="Employment Type" />
-            <input name="yearsInService" value={form.yearsInService} onChange={handleChange} type="text" placeholder="Years in Service" />
-            <input name="monthlyIncome" value={form.monthlyIncome} onChange={handleChange} type="text" placeholder="Monthly Income" />
-          </fieldset>
-
-          {/* Property & Financing */}
-          <fieldset>
-            <legend>Property & Financing</legend>
-            <input name="projectName" value={form.projectName} onChange={handleChange} type="text" placeholder="Project Name & Location" />
-            <textarea name="propertyDesc" value={form.propertyDesc} onChange={handleChange} placeholder="Subdivision / Block / Lot / House Description" />
-            <input name="lotArea" value={form.lotArea} onChange={handleChange} type="text" placeholder="Lot Area" />
-            <input name="houseArea" value={form.houseArea} onChange={handleChange} type="text" placeholder="House Area" />
-            <input name="contractPrice" value={form.contractPrice} onChange={handleChange} type="text" placeholder="Total Contract Price" />
-            <input name="downPayment" value={form.downPayment} onChange={handleChange} type="text" placeholder="Down Payment" />
-            <input name="dpTerm" value={form.dpTerm} onChange={handleChange} type="text" placeholder="DP Term" />
-            <input name="loanAmount" value={form.loanAmount} onChange={handleChange} type="text" placeholder="Loan Amount" />
-            <input name="monthlyAmort" value={form.monthlyAmort} onChange={handleChange} type="text" placeholder="Monthly Amortization" />
-            <select name="financingScheme" value={form.financingScheme} onChange={handleChange}>
-              <option value="">Financing Scheme</option>
-              <option>PAG-IBIG</option>
-              <option>In-House</option>
-              <option>Other</option>
+            <input name="SpouseLastName" value={form.SpouseLastName} onChange={handleChange} type="text" placeholder="Last Name" required />
+            <input name="SpouseFirstName" value={form.SpouseFirstName} onChange={handleChange} type="text" placeholder="First Name" required />
+            <input name="SpouseMiddleName" value={form.SpouseMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
+            <input name="spplaceOfBirth" value={form.spplaceOfBirth} onChange={handleChange} type="text" placeholder="Place of Birth" />
+            <input name="spAge" value={form.spAge} onChange={handleChange} type="text" placeholder="Age" />
+            <input name="spbirthday" value={form.spbirthday} onChange={handleChange} type="date" max={getMaxBirthdayDate()} placeholder="Birthday" />
+            <select name="spgender" value={form.spgender} onChange={handleChange}>
+              <option value="">Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            <select name="spcivilStatus" value={form.spcivilStatus} onChange={handleChange}>
+              <option value="">Civil Status</option>
+              <option>Single</option>
+              <option>Married</option>
+              <option>Legally Separated</option>
+              <option>Annulled</option>
+              <option>Widow/er</option>
+            </select>
+            <input name="spcitizenship" value={form.spcitizenship} onChange={handleChange} type="text" placeholder="Citizenship" />
+            <input name="spreligion" value={form.spreligion} onChange={handleChange} type="text" placeholder="Religion" />
+            <input name="spcontact" value={form.spcontact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" required />
+            <input name="spfacebook" value={form.spfacebook} onChange={handleChange} type="text" placeholder="Facebook/Messenger Account" />
+            <textarea name="sppresentAddress" value={form.sppresentAddress} onChange={handleChange} placeholder="Present Address" />
+            <textarea name="sppermanentAddress" value={form.sppermanentAddress} onChange={handleChange} placeholder="Permanent Address" />
+             <select name="spMailingAdd" value={form.spMailingAdd} onChange={handleChange}>
+              <option value="">PREFERRED MAILING ADD.:</option>
+              <option value="sppresentaddress">Present Address</option>
+              <option value="sppermanentaddress">Permanent Address</option>
+              <option value="spemployersaddress">Employers Address</option>
+            </select>
+            <input name="EmployersName" value={form.spEmployersName} onChange={handleChange} type="text" placeholder="EMPLOYER/BUSINESS NAME:" required />
+            <input name="NatureOfBusiness" value={form.spNatureOfBusiness} onChange={handleChange} type="text" placeholder="NATURE OF BUSINESS:" required />
+           <input name="PositionInDepartment" value={form.spositionInDepartment} onChange={handleChange} type="text" placeholder="POSITION & DEPARTMENT:" required />
+          <textarea name="EmployersAdd" value={form.spEmployersaddress} onChange={handleChange} placeholder="EMPLOYER/BUSINESS ADDRESS:" />
+            <input name="tin" value={form.sptin} onChange={handleChange} type="text" placeholder="TIN ID No." />
+            <input name="pagibig" value={form.sppagibig} onChange={handleChange} type="text" placeholder="PAG-IBIG MID No." />
+             <select name="spsourceOfIncome" value={form.spsourceOfIncome} onChange={handleChange}>
+              <option value="">SOURCE OF INCOME:</option>
+              <option value="Investment">Investment</option>
+              <option value="Remittance">Remittance</option>
+              <option value="Pension">Pension</option>
+              <option value="Employment">Employment</option>
+              <option value="Other">Other</option>
             </select>
           </fieldset>
+
+          <fieldset>
+            <legend>ATTORNEY-IN-FACT/AUTHORIZED REPRESENTATIVE</legend>
+            <input name="AttorneyLastName" value={form.AttorneyLastName} onChange={handleChange} type="text" placeholder="Last Name" required />
+            <input name="AttorneyFirstName" value={form.AttorneyFirstName} onChange={handleChange} type="text" placeholder="First Name" required />
+            <input name="AttorneyMiddleName" value={form.AttorneyMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
+            <select name="Attorneygender" value={form.Attorneygender} onChange={handleChange}>
+              <option value="">Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          <textarea name="AttorneypresentAddress" value={form.AttorneypresentAddress} onChange={handleChange} placeholder="Present Address" />
+          <input name="Attorneycontact" value={form.Attorneycontact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" required />
+
+           
+          </fieldset>
+
+           <fieldset>
+            <legend>Character References</legend>
+            <input name="refName" value={form.refName} onChange={handleChange} type="text" placeholder="Name" />
+            <textarea name="refAddress" value={form.refAddress} onChange={handleChange} placeholder="Address" />
+            <input name="refContact" value={form.refContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Contact No." />
+          </fieldset>
+
 
           {/* Co-Borrower */}
           <fieldset>
             <legend>Co-Borrower (if any)</legend>
             <input name="coLastName" value={form.coLastName} onChange={handleChange} type="text" placeholder="Last Name" />
-            <input name="coFirstName" value={form.coFirstName} onChange={handleChange} type="text" placeholder="First Name" />
-            <input name="coMiddleName" value={form.coMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
-            <input name="coBirthday" value={form.coBirthday} onChange={handleChange} type="date" placeholder="Birthday" />
-            <input name="coGender" value={form.coGender} onChange={handleChange} type="text" placeholder="Gender" />
-            <input name="coBirthPlace" value={form.coBirthPlace} onChange={handleChange} type="text" placeholder="Place of Birth" />
-            <input name="coCitizenship" value={form.coCitizenship} onChange={handleChange} type="text" placeholder="Citizenship" />
-            <input name="coCivilStatus" value={form.coCivilStatus} onChange={handleChange} type="text" placeholder="Civil Status" />
-            <input name="coReligion" value={form.coReligion} onChange={handleChange} type="text" placeholder="Religion" />
-            <textarea name="coAddress" value={form.coAddress} onChange={handleChange} placeholder="Present Address" />
-            <input name="coContact" value={form.coContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Contact No." />
-            <input name="coEmail" value={form.coEmail} onChange={handleChange} type="email" placeholder="Email Address" />
-            <input name="coSourceOfIncome" value={form.coSourceOfIncome} onChange={handleChange} type="text" placeholder="Source of Income" />
-          </fieldset>
+<input name="coFirstName" value={form.coFirstName} onChange={handleChange} type="text" placeholder="First Name" />
+<input name="coMiddleName" value={form.coMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
+<input name="coPlaceOfBirth" value={form.coPlaceOfBirth} onChange={handleChange} type="text" placeholder="Place of Birth" />
+<input name="coAge" value={form.coAge} onChange={handleChange} type="text" placeholder="Age" />
+<input name="coBirthday" value={form.coBirthday} onChange={handleChange} type="date" placeholder="Birthday" />
+<select name="coGender" value={form.coGender} onChange={handleChange}>
+  <option value="">Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Other">Other</option>
+</select>
+<select name="coCivilStatus" value={form.coCivilStatus} onChange={handleChange}>
+  <option value="">Civil Status</option>
+  <option>Single</option>
+  <option>Married</option>
+  <option>Legally Separated</option>
+  <option>Annulled</option>
+  <option>Widow/er</option>
+</select>
+<input name="coCitizenship" value={form.coCitizenship} onChange={handleChange} type="text" placeholder="Citizenship" />
+<input name="coReligion" value={form.coReligion} onChange={handleChange} type="text" placeholder="Religion" />
+<input name="coContact" value={form.coContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" />
+<input name="coFacebook" value={form.coFacebook} onChange={handleChange} type="text" placeholder="Facebook/Messenger Account" />
+<textarea name="coPresentAddress" value={form.coPresentAddress} onChange={handleChange} placeholder="Present Address" />
+<textarea name="coPermanentAddress" value={form.coPermanentAddress} onChange={handleChange} placeholder="Permanent Address" />
+<select name="coMailingAdd" value={form.coMailingAdd} onChange={handleChange}>
+  <option value="">PREFERRED MAILING ADD.:</option>
+  <option value="presentaddress">Present Address</option>
+  <option value="permanentaddress">Permanent Address</option>
+  <option value="employersaddress">Employers Address</option>
+</select>
+<input name="coEmployersName" value={form.coEmployersName} onChange={handleChange} type="text" placeholder="EMPLOYER/BUSINESS NAME:" required />
+<input name="coNatureOfBusiness" value={form.coNatureOfBusiness} onChange={handleChange} type="text" placeholder="NATURE OF BUSINESS:" required />
+<input name="coPositionInDepartment" value={form.coPositionInDepartment} onChange={handleChange} type="text" placeholder="POSITION & DEPARTMENT:" required />
+<textarea name="coEmployersAdd" value={form.coEmployersAdd} onChange={handleChange} placeholder="EMPLOYER/BUSINESS ADDRESS:" />
+<input name="coTin" value={form.coTin} onChange={handleChange} type="text" placeholder="TIN ID No." />
+<input name="coPagibig" value={form.coPagibig} onChange={handleChange} type="text" placeholder="PAG-IBIG MID No." />
+<select name="coSourceOfIncome" value={form.coSourceOfIncome} onChange={handleChange}>
+<option value="">SOURCE OF INCOME:</option>
+  <option value="Investment">Investment</option>
+  <option value="Remittance">Remittance</option>
+  <option value="Pension">Pension</option>
+  <option value="Employment">Employment</option>
+  <option value="Other">Other</option>
+</select>
 
+          </fieldset>
+          <fieldset>
+    <legend>Co-Borrower Spouse Information</legend>
+    <input name="coSpouseLastName" value={form.coSpouseLastName} onChange={handleChange} type="text" placeholder="Last Name" required />
+    <input name="coSpouseFirstName" value={form.coSpouseFirstName} onChange={handleChange} type="text" placeholder="First Name" required />
+    <input name="coSpouseMiddleName" value={form.coSpouseMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
+    <input name="coSpousePlaceOfBirth" value={form.coSpousePlaceOfBirth} onChange={handleChange} type="text" placeholder="Place of Birth" />
+    <input name="coSpouseAge" value={form.coSpouseAge} onChange={handleChange} type="text" placeholder="Age" />
+    <input name="coSpouseBirthday" value={form.coSpouseBirthday} onChange={handleChange} type="date" max={getMaxBirthdayDate()} placeholder="Birthday" />
+    <select name="coSpouseGender" value={form.coSpouseGender} onChange={handleChange}>
+        <option value="">Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select>
+    <select name="coSpouseCivilStatus" value={form.coSpouseCivilStatus} onChange={handleChange}>
+        <option value="">Civil Status</option>
+        <option>Single</option>
+        <option>Married</option>
+        <option>Legally Separated</option>
+        <option>Annulled</option>
+        <option>Widow/er</option>
+    </select>
+    <input name="coSpouseCitizenship" value={form.coSpouseCitizenship} onChange={handleChange} type="text" placeholder="Citizenship" />
+    <input name="coSpouseReligion" value={form.coSpouseReligion} onChange={handleChange} type="text" placeholder="Religion" />
+    <input name="coSpouseContact" value={form.coSpouseContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" required />
+    <input name="coSpouseFacebook" value={form.coSpouseFacebook} onChange={handleChange} type="text" placeholder="Facebook/Messenger Account" />
+    <textarea name="coSpousePresentAddress" value={form.coSpousePresentAddress} onChange={handleChange} placeholder="Present Address" />
+    <textarea name="coSpousePermanentAddress" value={form.coSpousePermanentAddress} onChange={handleChange} placeholder="Permanent Address" />
+    <select name="coSpouseMailingAdd" value={form.coSpouseMailingAdd} onChange={handleChange}>
+        <option value="">PREFERRED MAILING ADD.:</option>
+        <option value="coSpousePresentAddress">Present Address</option>
+        <option value="coSpousePermanentAddress">Permanent Address</option>
+        <option value="coSpouseEmployersAddress">Employers Address</option>
+    </select>
+    <input name="coSpouseEmployersName" value={form.coSpouseEmployersName} onChange={handleChange} type="text" placeholder="EMPLOYER/BUSINESS NAME:" required />
+    <input name="coSpouseNatureOfBusiness" value={form.coSpouseNatureOfBusiness} onChange={handleChange} type="text" placeholder="NATURE OF BUSINESS:" required />
+    <input name="coSpousePositionInDepartment" value={form.coSpousePositionInDepartment} onChange={handleChange} type="text" placeholder="POSITION & DEPARTMENT:" required />
+    <textarea name="coSpouseEmployersAdd" value={form.coSpouseEmployersAdd} onChange={handleChange} placeholder="EMPLOYER/BUSINESS ADDRESS:" />
+    <input name="coSpouseTin" value={form.coSpouseTin} onChange={handleChange} type="text" placeholder="TIN ID No." />
+    <input name="coSpousePagibig" value={form.coSpousePagibig} onChange={handleChange} type="text" placeholder="PAG-IBIG MID No." />
+    <select name="coSpouseSourceOfIncome" value={form.coSpouseSourceOfIncome} onChange={handleChange}>
+        <option value="">SOURCE OF INCOME:</option>
+        <option value="Investment">Investment</option>
+        <option value="Remittance">Remittance</option>
+        <option value="Pension">Pension</option>
+        <option value="Employment">Employment</option>
+        <option value="Other">Other</option>
+    </select>
+</fieldset>
+
+<fieldset>
+            <legend>ATTORNEY-IN-FACT/AUTHORIZED REPRESENTATIVE</legend>
+            <input name="AttorneycLastName" value={form.AttorneycLastName} onChange={handleChange} type="text" placeholder="Last Name" required />
+            <input name="AttorneycFirstName" value={form.AttorneycFirstName} onChange={handleChange} type="text" placeholder="First Name" required />
+            <input name="AttorneycMiddleName" value={form.AttorneycMiddleName} onChange={handleChange} type="text" placeholder="Middle Name" />
+            <select name="Attorneycgender" value={form.Attorneycgender} onChange={handleChange}>
+              <option value="">Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          <textarea name="AttorneycpresentAddress" value={form.AttorneycpresentAddress} onChange={handleChange} placeholder="Present Address" />
+          <input name="Attorneyccontact" value={form.Attorneyccontact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Cellphone/Telephone" required />
+
+           
+          </fieldset>
+            <fieldset className="form-section">
+            <legend>TO BE FILLED-UP BY MARKETING DEPARTMENT (For Pre-evaluation purposes)</legend>
+            <input name="subdivision" value={form.subdivision} onChange={handleChange} type="text" placeholder="SUBDIVISION/BLOCK/LOT" required />
+            <input name="houseDescription" value={form.houseDescription} onChange={handleChange} type="text" placeholder="HOUSE DESCRIPTION" required />
+            <input name="lotArea" value={form.lotArea} onChange={handleChange} type="text" placeholder="LOT AREA" required />
+            <input name="houseArea" value={form.houseArea} onChange={handleChange} type="text" placeholder="HOUSE AREA" required />
+            <input name="totalContractPrice" value={form.totalContractPrice} onChange={handleChange} type="text" placeholder="TOTAL CONTRACT PRICE" required />
+            <input name="downPayment" value={form.downPayment} onChange={handleChange} type="text" placeholder="DOWN PAYMENT" required />
+            <input name="dpTerm" value={form.dpTerm} onChange={handleChange} type="text" placeholder="DP TERM" required />
+            <input name="loanAmount" value={form.loanAmount} onChange={handleChange} type="text" placeholder="LOAN AMOUNT" required />
+            <input name="maTerm" value={form.maTerm} onChange={handleChange} type="text" placeholder="MA TERM" required />
+            <input name="monthlyAmortization" value={form.monthlyAmortization} onChange={handleChange} type="text" placeholder="MONTHLY AMORTIZATION" required />
+          </fieldset>
           {/* Character References */}
           <fieldset>
             <legend>Character References</legend>
-            <input name="refName" value={form.refName} onChange={handleChange} type="text" placeholder="Name" />
-            <textarea name="refAddress" value={form.refAddress} onChange={handleChange} placeholder="Address" />
-            <input name="refContact" value={form.refContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Contact No." />
+            <input name="CorefName" value={form.CorefName} onChange={handleChange} type="text" placeholder="Name" />
+            <textarea name="CorefAddress" value={form.CorefAddress} onChange={handleChange} placeholder="Address" />
+            <input name="CorefContact" value={form.CorefContact} onChange={handleChange} type="tel" pattern="[0-9]{10,13}" placeholder="Contact No." />
           </fieldset>
 
           {/* Signature Section */}

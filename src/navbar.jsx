@@ -20,9 +20,8 @@ const Navbar = () => {
             </div>
             <ul className="navbar-nav">
                 <li className="nav-item"><a href="/dashboard">Home</a></li>
+                                <li className="nav-item"><a href="/user-messaging">Messages</a></li>
                 <li className="nav-item"><a href="/downloads">Downloads</a></li>
-                <li className="nav-item"><a href="/inquiry">Inquiry</a></li>
-                <li className="nav-item"><a href="/user-messaging">Messages</a></li>
             </ul>
             <div className="user-icon" onClick={toggleDropdown}>
                 <span className="text-black">👤</span>
