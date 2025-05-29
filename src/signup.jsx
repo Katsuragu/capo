@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set } from 'firebase/database'; // <-- Add this
 import firebaseConfig from './firebaseConfig';
 import './signup.css';
 
-// Initialize Firebase app and get auth/database instances
+// Initialize Firebase app and get auth instance
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
+const db = getDatabase(app); // <-- Add this
 
-const ADMIN_EMAIL = "admin@gmail.com"; // Define your admin email
+const ADMIN_EMAIL = "admin@gmail.com"; // Change this to your desired admin email
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -23,25 +23,6 @@ const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState('');
-
-    // Redirect if session exists
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            navigate('/dashboard');
-        }
-    }, [navigate]);
-
-    // Optional: Real-time auth state listener
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                navigate('/dashboard');
-            }
-        });
-
-        return () => unsubscribe();
-    }, [navigate]);
 
     const signUpWithEmail = async () => {
         if (!email || !password || !confirmPassword) {
@@ -61,23 +42,14 @@ const Signup = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            const isAdmin = email === ADMIN_EMAIL;
-
-            // Save to Realtime Database
+            // Set admin flag if email matches
             await set(ref(db, 'users/' + user.uid), {
                 email: user.email,
-                isAdmin: isAdmin
+                isAdmin: email === ADMIN_EMAIL
             });
 
-            // Store session locally
-            localStorage.setItem('user', JSON.stringify({
-                uid: user.uid,
-                email: user.email,
-                isAdmin: isAdmin
-            }));
-
             console.log('User signed up with email:', email);
-            navigate('/dashboard');
+            navigate('/dashboard'); // Redirect to dashboard
         } catch (error) {
             console.error(error);
             setError(error.message || 'Failed to sign up');
@@ -148,9 +120,7 @@ const Signup = () => {
                     </div>
 
                     <div className='signup-login'>
-                        <p className='signup-login-text'>
-                            Already have an account? <span className='signup-login-link' onClick={() => navigate('/login')}>Log In</span>
-                        </p>
+                        <p className='signup-login-text'>Already have an account? <span className='signup-login-link' onClick={() => navigate('/login')}>Log In</span></p>
                     </div>
                 </div>
             </div>
