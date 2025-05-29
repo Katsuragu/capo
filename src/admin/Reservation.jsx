@@ -13,10 +13,12 @@ const db = getDatabase(app);
 
 const Reservation = () => {
     const [reservations, setReservations] = useState([]);
+    const [sortColumn, setSortColumn] = useState(null); // State for the currently sorted column
+    const [sortDirection, setSortDirection] = useState('asc'); // 'asc' for ascending, 'desc' for descending
 
     useEffect(() => {
-const reservationsRef = ref(db, 'principalBuyers');        
-const handleValue = (snapshot) => {
+        const reservationsRef = ref(db, 'principalBuyers');
+        const handleValue = (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 const reservationList = Object.entries(data).map(([id, value]) => ({
@@ -28,9 +30,78 @@ const handleValue = (snapshot) => {
                 setReservations([]);
             }
         };
+
         onValue(reservationsRef, handleValue);
         return () => off(reservationsRef);
     }, []);
+
+    // Function to format date
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
+    // Function to parse and format the principal's name
+    const formatPrincipalName = (fullName) => {
+        if (!fullName) return '';
+        const parts = fullName.split(' ').filter(part => part.trim() !== ''); // Split by space and remove empty strings
+        let firstName = '';
+        let middleName = '';
+        let lastName = '';
+
+        if (parts.length === 1) {
+            firstName = parts[0];
+        } else if (parts.length === 2) {
+            firstName = parts[0];
+            lastName = parts[1];
+        } else if (parts.length >= 3) {
+            firstName = parts[0];
+            lastName = parts[parts.length - 1]; // Last part is the last name
+            middleName = parts.slice(1, parts.length - 1).join(' '); // Middle parts joined
+        }
+
+        return `${firstName} ${middleName} ${lastName}`.trim();
+    };
+
+    // Function to handle column header clicks for sorting
+    const handleSort = (columnName) => {
+        if (sortColumn === columnName) {
+            // If clicking the same column, reverse the sort direction
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+        } else {
+            // If clicking a new column, set it as the sort column and default to ascending
+            setSortColumn(columnName);
+            setSortDirection('asc');
+        }
+    };
+
+    // Sort the reservations based on sortColumn and sortDirection
+    const sortedReservations = [...reservations].sort((a, b) => {
+        if (!sortColumn) return 0; // No sorting if no column is selected
+
+        let aValue = a[sortColumn];
+        let bValue = b[sortColumn];
+
+        // Handle cases where values might be numbers or strings
+        if (typeof aValue === 'string' && typeof bValue === 'string') {
+            return sortDirection === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+            return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+        } else {
+            // Fallback for mixed types or other scenarios (e.g., convert to string for comparison)
+            const aString = String(aValue);
+            const bString = String(bValue);
+            return sortDirection === 'asc' ? aString.localeCompare(bString) : bString.localeCompare(aString);
+        }
+    });
+
+    // Helper to render sort indicator
+    const renderSortIndicator = (columnName) => {
+        if (sortColumn === columnName) {
+            return sortDirection === 'asc' ? ' ⬆️' : ' ⬇️';
+        }
+        return '';
+    };
 
     return (
         <div className="reservation-admin-container">
@@ -43,77 +114,77 @@ const handleValue = (snapshot) => {
                 <table className="reservation-table">
                     <thead>
                         <tr>
-                            <th>Principal Name</th>
-                            <th>Present Address</th>
-                            <th>Permanent Address</th>
-                            <th>Place of Birth</th>
-                            <th>Birthday</th>
-                            <th>Gender</th>
-                            <th>Civil Status</th>
-                            <th>Citizenship</th>
-                            <th>Religion</th>
-                            <th>Contact</th>
-                            <th>Facebook</th>
-                            <th>TIN</th>
-                            <th>PAG-IBIG</th>
-                            <th>Spouse Name</th>
-                            <th>Spouse Birth Place</th>
-                            <th>Spouse Birthday</th>
-                            <th>Spouse Citizenship</th>
-                            <th>Spouse Religion</th>
-                            <th>Spouse Employer</th>
-                            <th>Spouse Business</th>
-                            <th>Spouse Position</th>
-                            <th>Spouse Employer Address</th>
-                            <th>Spouse Office Tel</th>
-                            <th>Spouse Contact Person</th>
-                            <th>Spouse Email</th>
-                            <th>Source of Income</th>
-                            <th>Employment Type</th>
-                            <th>Years in Service</th>
-                            <th>Monthly Income</th>
-                            <th>Project Name</th>
-                            <th>Property Desc</th>
-                            <th>Lot Area</th>
-                            <th>House Area</th>
-                            <th>Contract Price</th>
-                            <th>Down Payment</th>
-                            <th>DP Term</th>
-                            <th>Loan Amount</th>
-                            <th>Monthly Amort</th>
-                            <th>Financing Scheme</th>
-                            <th>Co-Borrower Name</th>
-                            <th>Co-Borrower Birthday</th>
-                            <th>Co-Borrower Gender</th>
-                            <th>Co-Borrower Birth Place</th>
-                            <th>Co-Borrower Citizenship</th>
-                            <th>Co-Borrower Civil Status</th>
-                            <th>Co-Borrower Religion</th>
-                            <th>Co-Borrower Address</th>
-                            <th>Co-Borrower Contact</th>
-                            <th>Co-Borrower Email</th>
-                            <th>Co-Borrower Source of Income</th>
-                            <th>Reference Name</th>
-                            <th>Reference Address</th>
-                            <th>Reference Contact</th>
+                            <th onClick={() => handleSort('principalName')}>Principal Name {renderSortIndicator('principalName')}</th>
+                            <th onClick={() => handleSort('presentAddress')}>Present Address {renderSortIndicator('presentAddress')}</th>
+                            <th onClick={() => handleSort('permanentAddress')}>Permanent Address {renderSortIndicator('permanentAddress')}</th>
+                            <th onClick={() => handleSort('placeOfBirth')}>Place of Birth {renderSortIndicator('placeOfBirth')}</th>
+                            <th onClick={() => handleSort('birthday')}>Birthday {renderSortIndicator('birthday')}</th>
+                            <th onClick={() => handleSort('gender')}>Gender {renderSortIndicator('gender')}</th>
+                            <th onClick={() => handleSort('civilStatus')}>Civil Status {renderSortIndicator('civilStatus')}</th>
+                            <th onClick={() => handleSort('citizenship')}>Citizenship {renderSortIndicator('citizenship')}</th>
+                            <th onClick={() => handleSort('religion')}>Religion {renderSortIndicator('religion')}</th>
+                            <th onClick={() => handleSort('contact')}>Contact {renderSortIndicator('contact')}</th>
+                            <th onClick={() => handleSort('facebook')}>Facebook {renderSortIndicator('facebook')}</th>
+                            <th onClick={() => handleSort('tin')}>TIN {renderSortIndicator('tin')}</th>
+                            <th onClick={() => handleSort('pagibig')}>PAG-IBIG {renderSortIndicator('pagibig')}</th>
+                            <th onClick={() => handleSort('spouseName')}>Spouse Name {renderSortIndicator('spouseName')}</th>
+                            <th onClick={() => handleSort('spouseBirthPlace')}>Spouse Birth Place {renderSortIndicator('spouseBirthPlace')}</th>
+                            <th onClick={() => handleSort('spouseBirthday')}>Spouse Birthday {renderSortIndicator('spouseBirthday')}</th>
+                            <th onClick={() => handleSort('spouseCitizenship')}>Spouse Citizenship {renderSortIndicator('spouseCitizenship')}</th>
+                            <th onClick={() => handleSort('spouseReligion')}>Spouse Religion {renderSortIndicator('spouseReligion')}</th>
+                            <th onClick={() => handleSort('spouseEmployer')}>Spouse Employer {renderSortIndicator('spouseEmployer')}</th>
+                            <th onClick={() => handleSort('spouseBusiness')}>Spouse Business {renderSortIndicator('spouseBusiness')}</th>
+                            <th onClick={() => handleSort('spousePosition')}>Spouse Position {renderSortIndicator('spousePosition')}</th>
+                            <th onClick={() => handleSort('spouseEmployerAddress')}>Spouse Employer Address {renderSortIndicator('spouseEmployerAddress')}</th>
+                            <th onClick={() => handleSort('spouseOfficeTel')}>Spouse Office Tel {renderSortIndicator('spouseOfficeTel')}</th>
+                            <th onClick={() => handleSort('spouseContactPerson')}>Spouse Contact Person {renderSortIndicator('spouseContactPerson')}</th>
+                            <th onClick={() => handleSort('spouseEmail')}>Spouse Email {renderSortIndicator('spouseEmail')}</th>
+                            <th onClick={() => handleSort('sourceOfIncome')}>Source of Income {renderSortIndicator('sourceOfIncome')}</th>
+                            <th onClick={() => handleSort('employmentType')}>Employment Type {renderSortIndicator('employmentType')}</th>
+                            <th onClick={() => handleSort('yearsInService')}>Years in Service {renderSortIndicator('yearsInService')}</th>
+                            <th onClick={() => handleSort('monthlyIncome')}>Monthly Income {renderSortIndicator('monthlyIncome')}</th>
+                            <th onClick={() => handleSort('projectName')}>Project Name {renderSortIndicator('projectName')}</th>
+                            <th onClick={() => handleSort('propertyDesc')}>Property Desc {renderSortIndicator('propertyDesc')}</th>
+                            <th onClick={() => handleSort('lotArea')}>Lot Area {renderSortIndicator('lotArea')}</th>
+                            <th onClick={() => handleSort('houseArea')}>House Area {renderSortIndicator('houseArea')}</th>
+                            <th onClick={() => handleSort('contractPrice')}>Contract Price {renderSortIndicator('contractPrice')}</th>
+                            <th onClick={() => handleSort('downPayment')}>Down Payment {renderSortIndicator('downPayment')}</th>
+                            <th onClick={() => handleSort('dpTerm')}>DP Term {renderSortIndicator('dpTerm')}</th>
+                            <th onClick={() => handleSort('loanAmount')}>Loan Amount {renderSortIndicator('loanAmount')}</th>
+                            <th onClick={() => handleSort('monthlyAmort')}>Monthly Amort {renderSortIndicator('monthlyAmort')}</th>
+                            <th onClick={() => handleSort('financingScheme')}>Financing Scheme {renderSortIndicator('financingScheme')}</th>
+                            <th onClick={() => handleSort('coName')}>Co-Borrower Name {renderSortIndicator('coName')}</th>
+                            <th onClick={() => handleSort('coBirthday')}>Co-Borrower Birthday {renderSortIndicator('coBirthday')}</th>
+                            <th onClick={() => handleSort('coGender')}>Co-Borrower Gender {renderSortIndicator('coGender')}</th>
+                            <th onClick={() => handleSort('coBirthPlace')}>Co-Borrower Birth Place {renderSortIndicator('coBirthPlace')}</th>
+                            <th onClick={() => handleSort('coCitizenship')}>Co-Borrower Citizenship {renderSortIndicator('coCitizenship')}</th>
+                            <th onClick={() => handleSort('coCivilStatus')}>Co-Borrower Civil Status {renderSortIndicator('coCivilStatus')}</th>
+                            <th onClick={() => handleSort('coReligion')}>Co-Borrower Religion {renderSortIndicator('coReligion')}</th>
+                            <th onClick={() => handleSort('coAddress')}>Co-Borrower Address {renderSortIndicator('coAddress')}</th>
+                            <th onClick={() => handleSort('coContact')}>Co-Borrower Contact {renderSortIndicator('coContact')}</th>
+                            <th onClick={() => handleSort('coEmail')}>Co-Borrower Email {renderSortIndicator('coEmail')}</th>
+                            <th onClick={() => handleSort('coSourceOfIncome')}>Co-Borrower Source of Income {renderSortIndicator('coSourceOfIncome')}</th>
+                            <th onClick={() => handleSort('refName')}>Reference Name {renderSortIndicator('refName')}</th>
+                            <th onClick={() => handleSort('refAddress')}>Reference Address {renderSortIndicator('refAddress')}</th>
+                            <th onClick={() => handleSort('refContact')}>Reference Contact {renderSortIndicator('refContact')}</th>
                             <th>Principal Signature</th>
                             <th>Spouse Signature</th>
                             <th>Co-Borrower Signature</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {reservations.length === 0 ? (
+                        {sortedReservations.length === 0 ? (
                             <tr>
                                 <td colSpan="56" style={{ textAlign: 'center' }}>No reservations found.</td>
                             </tr>
                         ) : (
-                            reservations.map((r) => (
+                            sortedReservations.map((r) => (
                                 <tr key={r.id}>
-                                    <td>{r.principalName}</td>
+                                    <td>{formatPrincipalName(r.principalName)}</td>
                                     <td>{r.presentAddress}</td>
                                     <td>{r.permanentAddress}</td>
                                     <td>{r.placeOfBirth}</td>
-                                    <td>{r.birthday}</td>
+                                    <td>{formatDate(r.birthday)}</td>
                                     <td>{r.gender}</td>
                                     <td>{r.civilStatus}</td>
                                     <td>{r.citizenship}</td>
@@ -124,7 +195,7 @@ const handleValue = (snapshot) => {
                                     <td>{r.pagibig}</td>
                                     <td>{r.spouseName}</td>
                                     <td>{r.spouseBirthPlace}</td>
-                                    <td>{r.spouseBirthday}</td>
+                                    <td>{formatDate(r.spouseBirthday)}</td>
                                     <td>{r.spouseCitizenship}</td>
                                     <td>{r.spouseReligion}</td>
                                     <td>{r.spouseEmployer}</td>
@@ -149,7 +220,7 @@ const handleValue = (snapshot) => {
                                     <td>{r.monthlyAmort}</td>
                                     <td>{r.financingScheme}</td>
                                     <td>{r.coName}</td>
-                                    <td>{r.coBirthday}</td>
+                                    <td>{formatDate(r.coBirthday)}</td>
                                     <td>{r.coGender}</td>
                                     <td>{r.coBirthPlace}</td>
                                     <td>{r.coCitizenship}</td>
@@ -162,9 +233,15 @@ const handleValue = (snapshot) => {
                                     <td>{r.refName}</td>
                                     <td>{r.refAddress}</td>
                                     <td>{r.refContact}</td>
-                                    <td>{r.sigPrincipal}</td>
-                                    <td>{r.sigSpouse}</td>
-                                    <td>{r.sigCo}</td>
+                                    <td>
+                                        {r.sigPrincipal && <img src={r.sigPrincipal} alt="Principal Signature" style={{ width: '120px' }} />}
+                                    </td>
+                                    <td>
+                                        {r.sigSpouse && <img src={r.sigSpouse} alt="Spouse Signature" style={{ width: '120px' }} />}
+                                    </td>
+                                    <td>
+                                        {r.sigCo && <img src={r.sigCo} alt="Co-Borrower Signature" style={{ width: '120px' }} />}
+                                    </td>
                                 </tr>
                             ))
                         )}
